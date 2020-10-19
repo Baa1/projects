@@ -1,5 +1,8 @@
 <template>
   <div class="LoginForm">
+    Login: <input type="text" maxlength="30" name="login">
+    Password: <input type="password" maxlength="20" name="password">
+    <button v-on:click="logInClicked">Log In</button>
   </div>
 </template>
 
@@ -12,6 +15,11 @@ export default {
   },
   props: {
 
+  },
+  methods: {
+    logInClicked: function() {
+      
+    }
   }
 }
 </script>
