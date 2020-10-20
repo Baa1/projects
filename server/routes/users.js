@@ -5,7 +5,7 @@ var sha1 = require('sha1');
 var crypto = require('crypto');
 
 router.post('/authorization', function(req, res) {
-  db.any("SELECT * FROM users WHERE login = $1", req.body.login)
+  db.any("SELECT id, login FROM users WHERE login = $1", req.body.login)
     .then((response) => {
       res.send(response);
     })
@@ -24,7 +24,13 @@ router.post('/registration', function(req, res) {
   ]
   db.any("INSERT INTO users (login, password, salt) VALUES ($1, $2, $3) RETURNING id as userId", params)
     .then((response) => {
-      res.send(response);
+      let user = {
+        id: 0,
+        login: ""
+      };
+      if (response && response.length > 0)
+
+      res.send(user);
     })
     .catch((error) => {
       console.log(error);

@@ -14,10 +14,11 @@ export default {
         }
     },
     actions: {
-        AUTORIZATION({commit}, params) {
+        AUTHORIZATION({commit}, params) {
             axios.post("http://localhost:3000/users/authorization", params)
             .then(function (response) {
-                commit('SET_USER_ID', response.data)
+                console.log(response.data);
+                commit('SET_USER_ID', response.data);
             })
             .catch(function (error) {
                 console.log(error);
@@ -26,7 +27,8 @@ export default {
         REGISTRATION({commit}, params) {
             axios.post("http://localhost:3000/users/registration", params)
             .then(function (response) {
-                commit('SET_USER_ID', response.data)
+                console.log(response.data);
+                commit('SET_USER_ID', response.data);
             })
             .catch(function (error) {
                 console.log(error);
