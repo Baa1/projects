@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <RegistrationForm/>
-    <AuthorizationForm/>
+    <router-view>
+    
+    </router-view>
+    <!-- <RegistrationForm/>
+    <AuthorizationForm/> -->
   </div>
 </template>
 
 <script>
-import RegistrationForm from './components/RegistrationForm'
-import AuthorizationForm from './components/AuthorizationForm'
+// import RegistrationForm from './components/RegistrationForm'
+// import AuthorizationForm from './components/AuthorizationForm'
 export default {
   name: 'App',
-  components: {
-    RegistrationForm,
-    AuthorizationForm
-  }  
+  // components: {
+  //   RegistrationForm,
+  //   AuthorizationForm
+  // }  
 }
 </script>
 
