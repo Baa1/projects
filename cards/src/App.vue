@@ -1,22 +1,18 @@
 <template>
   <div id="app">
-    <router-view>
-    
-    </router-view>
-    <!-- <RegistrationForm/>
-    <AuthorizationForm/> -->
+    <router-link v-bind:to="{ name: 'authorization' }">
+      Authorization
+    </router-link>
+    <router-link v-bind:to="{ name: 'registration' }">
+      Registration
+    </router-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// import RegistrationForm from './components/RegistrationForm'
-// import AuthorizationForm from './components/AuthorizationForm'
 export default {
-  name: 'App',
-  // components: {
-  //   RegistrationForm,
-  //   AuthorizationForm
-  // }  
+  name: 'App',  
 }
 </script>
 
