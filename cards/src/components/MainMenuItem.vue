@@ -15,9 +15,5 @@ export default {
 </script>
 
 <style scoped>
-  .MainMenuItem {
-    height: 40px;
-    border: 1px solid blue;
-    margin: 5px;
-  }
+  
 </style>

@@ -38,11 +38,5 @@ export default {
 </script>
 
 <style scoped>
-  .MainMenu {
-    border: 1px solid red;
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-    width: 15%;
-  }
+  
 </style>

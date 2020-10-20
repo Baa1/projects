@@ -1,18 +1,16 @@
 <template>
-  <div id="app">
-    <router-link v-bind:to="{ name: 'authorization' }">
-      Authorization
-    </router-link>
-    <router-link v-bind:to="{ name: 'registration' }">
-      Registration
-    </router-link>
-    <router-view></router-view>
-  </div>
+  <!-- <MainContent/> -->
+  <router-view>
+  </router-view>
 </template>
 
 <script>
+// import MainContent from './components/MainContent'
 export default {
   name: 'App',  
+  // components: {
+  //   MainContent
+  // }
 }
 </script>
 
