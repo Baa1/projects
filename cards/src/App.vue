@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <MainMenu/>
+    <LoginForm/>
   </div>
 </template>
 
 <script>
-import MainMenu from './components/MainMenu'
+import LoginForm from './components/LoginForm'
 export default {
   name: 'App',
   components: {
-    MainMenu
+    LoginForm
   }  
 }
 </script>
