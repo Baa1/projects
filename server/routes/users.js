@@ -3,6 +3,18 @@ var router = express.Router();
 var db = require('../settings/db');
 var sha1 = require('sha1');
 var crypto = require('crypto');
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  service: 'gmail',
+  auth: {
+    user: 'v.bolhovec@gmail.com',
+    pass: 'bethrezen'
+  }
+});
 
 router.post('/authorization', function(req, res) {
   db.any("SELECT * FROM users WHERE login = $1", req.body.login)
@@ -45,9 +57,22 @@ router.post('/registration', function(req, res) {
         id: 0,
         login: ""
       };
-      if (response && response.length > 0)
-
-      res.send(user);
+      if (response && response.length > 0) {
+        var mailOptions = {
+          from: 'v.bolhovec@gmail.com',
+          to: req.body.login,
+          subject: 'Registration',
+          text: 'Testing text'
+        };
+        transporter.sendMail(mailOptions, (err, info) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('Email sent' + info.response);
+          }
+        });
+        res.send(user);
+      }
     })
     .catch((error) => {
       console.log(error);

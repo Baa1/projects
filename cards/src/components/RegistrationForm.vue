@@ -1,8 +1,8 @@
 <template>
   <div class="RegistrationForm">
     <form v-on:submit.prevent="registrationClicked">
-      <input type="text" maxlength="30" v-model="login" placeholder="Login">
-      <input type="password" maxlength="20" v-model="password" placeholder="Password">
+      <input type="email" maxlength="30" v-model="login" placeholder="E-mail" required>
+      <input type="password" maxlength="20" v-model="password" placeholder="Password" required>
       <button>Registrate</button>
     </form>
   </div>

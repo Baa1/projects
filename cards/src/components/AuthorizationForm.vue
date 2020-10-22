@@ -26,6 +26,9 @@ export default {
       this.AUTHORIZATION({
         login: this.login, 
         password: this.password
+      })
+      .then(() => {
+        this.$router.push({path:'/'})
       });
     }
   }
