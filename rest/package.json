@@ -1,0 +1,13 @@
+{
+  "name": "rest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "fastify": "^3.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "rest": "node app"
+  }
+}
