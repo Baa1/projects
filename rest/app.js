@@ -1,6 +1,24 @@
 // Require the framework and instantiate it
 const fastify = require('fastify')({ logger: true })
 
+
+
+fastify.register(require('fastify-cors'), {
+  "origin": '',
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": true,
+  "optionsSuccessStatus": 201
+  })
+  fastify.addHook('onSend', (request, reply, payload, next) => {
+  reply.header("Access-Control-Allow-Origin", "http://localhost:8080");
+  reply.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Cache-Control");
+  next()
+});
+
+fastify.require(('./routes/users'), { 
+  prefix: '/users' 
+});
+
 // Declare a route
 fastify.get('/', async (request, reply) => {
     return { hello: 'world' }
