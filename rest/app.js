@@ -3,13 +3,20 @@ const fastify = require('fastify')({ logger: true })
 
 // Declare a route
 fastify.get('/', async (request, reply) => {
-  return { hello: 'world' }
+    return { hello: 'world' }
 })
 
 fastify.get('/users', async (request, reply) => {
     console.log(request.params);
+    console.log(request.body);
     return { userId: 1 }
-  })
+})
+
+fastify.post('/users/authorization', async (request, reply) => {
+    console.log(request.params);
+    console.log(request.body);
+    return { userId: 1 }
+})  
 
 // Run the server!
 const start = async () => {
