@@ -17,7 +17,6 @@ export default {
         AUTHORIZATION({commit}, params) {
             axios.post("http://localhost:3000/users/authorization", params)
             .then(function (response) {
-                console.log(response.data);
                 commit('SET_USER_ID', response.data);
             })
             .catch(function (error) {
@@ -27,7 +26,6 @@ export default {
         REGISTRATION({commit}, params) {
             axios.post("http://localhost:3000/users/registration", params)
             .then(function (response) {
-                console.log(response.data);
                 commit('SET_USER_ID', response.data);
             })
             .catch(function (error) {

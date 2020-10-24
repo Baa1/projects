@@ -8,12 +8,17 @@
         Registration
     </router-link>
     
+    <CardsList/>
   </div>
 </template>
 
 <script>
+import CardsList from './CardsList'
 export default {
     name: 'MainContent',
+    components: {
+      CardsList
+    }
 }
 </script>
 

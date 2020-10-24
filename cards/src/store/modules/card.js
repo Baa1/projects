@@ -1,8 +1,27 @@
+import axios from 'axios'
 export default {
     state: {
-        cardId: 0
+        cards: []
     },
-    getters: {},
-    mutations: {},
-    actions: {}
+    getters: {
+        CARDS(state) {
+            return state.cards;
+        }
+    },
+    mutations: {
+        SET_CARDS: function (state, cards) {
+            state.cards = cards;
+        }
+    },
+    actions: {
+        GET_CARDS({commit}) {
+            axios.get('http://localhost:3000/cards/get')
+            .then(function(response) {
+                commit('SET_CARDS', response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        }
+    }
 };
