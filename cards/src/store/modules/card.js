@@ -22,6 +22,15 @@ export default {
             .catch(function(error) {
                 console.log(error);
             });
+        },
+        ADD_CARD({commit}, params) {
+            axios.post('http://localhost:3000/cards/add', params)
+            .then(function() {
+                commit();
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
         }
     }
 };

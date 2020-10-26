@@ -16,7 +16,7 @@ export default {
     return {
       login: "",
       password: ""
-    }
+    };
   },
   methods: {
     ...mapActions([
