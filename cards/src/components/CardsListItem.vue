@@ -2,7 +2,7 @@
   <div class="CardsListItem">
     <input v-if="edit" v-model="cardName" type="text" name="cardName" id="cardName">
     <button v-if="edit" v-on:click="addCard">Add</button>
-    <p>{{name}}</p>
+    <a v-else v-bind:href="'https://starcitygames.com/search/?card_name=' + name"><p>{{name.replace("%25c%25", ",")}}</p></a>
   </div>
 </template>
 
