@@ -9,26 +9,26 @@ export default {
         }
     },
     mutations: {
-        SET_USER_ID: function (state, userId) {
+        SET_USER_ID: (state, userId) => {
             state.userId = userId;
         }
     },
     actions: {
         AUTHORIZATION({commit}, params) {
             axios.post("http://localhost:3000/users/authorization", params)
-            .then(function (response) {
+            .then(response => {
                 commit('SET_USER_ID', response.data);
             })
-            .catch(function (error) {
+            .catch(error => {
                 console.log(error);
             });
         },
         REGISTRATION({commit}, params) {
             axios.post("http://localhost:3000/users/registration", params)
-            .then(function (response) {
+            .then(response => {
                 commit('SET_USER_ID', response.data);
             })
-            .catch(function (error) {
+            .catch(error => {
                 console.log(error);
             });
         }

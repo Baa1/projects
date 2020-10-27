@@ -1,7 +1,7 @@
 <template>
   <div class="CardsList">
       <CardsListItem v-for="card in CARDS" v-bind:name="card.name" v-bind:key="card.id"/>
-      <CardsListItem edit="true" v-on:cardAdded="refresh"/>
+      <CardsListItem edit="true"/>
   </div>
 </template>
 
@@ -22,10 +22,7 @@ export default {
   methods: {
     ...mapActions([
       'GET_CARDS'
-    ]),
-    refresh: function() {
-      this.GET_CARDS();
-    }
+    ])
   },
   mounted: function() {
     this.GET_CARDS();
