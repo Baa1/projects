@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import CardsListItem from './CardsListItem';
+import CardsListItem from './CardsListItem'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {

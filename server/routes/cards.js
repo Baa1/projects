@@ -20,8 +20,18 @@ router.post('/add', function(req, res) {
     });
 });
 
-router.get('/get', function(req, res) {
+router.get('/get_cards', function(req, res) {
     db.any('SELECT * FROM cards')
+    .then(response => {
+        res.send(response);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+});
+
+router.get('/get_sets', function(req, res) {
+    db.any('SELECT * FROM sets')
     .then(response => {
         res.send(response);
     })

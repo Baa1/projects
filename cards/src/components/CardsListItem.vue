@@ -20,11 +20,12 @@ export default {
       ...mapActions([
         'ADD_CARD'
       ]),
-      addCard: function(event) {
-        console.log(event.target);
-        event.target.value = "";
+      addCard: function() {
         this.ADD_CARD({
           name: this.cardName, 
+        })
+        .then(() => {
+          this.cardName = "";
         });
       }
     }
