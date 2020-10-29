@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Common option requests
 app.use(function(req, res, next) {
+    console.log(req.ip);
     res.header("Access-Control-Allow-Origin", "http://localhost:8080");
     //res.header("Access-Control-Allow-Origin", "http://94.73.253.155:8080");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
