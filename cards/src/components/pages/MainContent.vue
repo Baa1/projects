@@ -10,19 +10,34 @@
         
         <CardsList/>
         <ItemSelector v-bind:items="SETS"/>
+        <ItemSelector v-bind:items="items"/>
     </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import CardsList from './CardsList'
-import ItemSelector from './ItemSelector'
+import CardsList from '../controls/CardsList'
+import ItemSelector from '../controls/ItemSelector'
 
 export default {
     name: 'MainContent',
     components: {
         CardsList,
         ItemSelector
+    },
+    data() {
+        return {
+            items: [
+                {
+                    id: 1,
+                    name: '123'
+                },
+                {
+                    id: 2,
+                    name: '456'
+                }
+            ]
+        }
     },
     computed: {
         ...mapGetters([

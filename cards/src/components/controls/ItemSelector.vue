@@ -1,0 +1,28 @@
+<template>
+  <div class="ItemSelector">
+    <select v-model="selectedItem">
+        <option disabled value=""></option>
+        <option v-for="item in items" 
+                v-bind:key="item.id" 
+                v-bind:value="item">{{item.name}}
+        </option>
+    </select>
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: 'ItemSelector',
+  props: ['items'], 
+  data() {
+    return {
+      selectedItem: {}
+    };
+  }
+}
+</script>
+
+<style>
+
+</style>

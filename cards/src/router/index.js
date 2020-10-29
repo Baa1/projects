@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import MainContent from '../components/MainContent'
-import AuthorizationForm from '../components/AuthorizationForm'
-import RegistrationForm from '../components/RegistrationForm'
+import MainContent from '../components/pages/MainContent'
+import AuthorizationForm from '../components/forms/AuthorizationForm'
+import RegistrationForm from '../components/forms/RegistrationForm'
 
 Vue.use(Router);
 
