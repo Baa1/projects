@@ -11,6 +11,7 @@
         <CardsList/>
         <ItemSelector v-bind:items="SETS"/>
         <ItemSelector v-bind:items="items"/>
+        <FileUploader/>
     </div>
 </template>
 
@@ -18,12 +19,14 @@
 import { mapActions, mapGetters } from 'vuex'
 import CardsList from '../controls/CardsList'
 import ItemSelector from '../controls/ItemSelector'
+import FileUploader from '../controls/FileUploader'
 
 export default {
     name: 'MainContent',
     components: {
         CardsList,
-        ItemSelector
+        ItemSelector,
+        FileUploader
     },
     data() {
         return {

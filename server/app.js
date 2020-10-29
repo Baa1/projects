@@ -3,19 +3,22 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var multer = require('multer');
 
 //Requiring routes
 var usersRouter = require('./routes/users');
 var cardsRouter = require('./routes/cards');
+var filesRouter = require('./routes/files');
 
 var app = express();
 
-//Using modules
+//Using plugins
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(multer({dest:"files"}).single("filedata"));
 
 //Common option requests
 app.use(function(req, res, next) {
@@ -28,5 +31,6 @@ app.use(function(req, res, next) {
 //Using routes
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
+app.use('/files', filesRouter);
 
 module.exports = app;
