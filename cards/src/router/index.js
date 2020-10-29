@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import MainContent from '../components/pages/MainContent'
+import MainPage from '../components/pages/MainPage'
 import AuthorizationForm from '../components/forms/AuthorizationForm'
 import RegistrationForm from '../components/forms/RegistrationForm'
 
@@ -11,7 +11,7 @@ let router = new Router({
         {
             path: "/",
             name: "main",
-            component: MainContent
+            component: MainPage
         },
         {
             path: "/authorization",

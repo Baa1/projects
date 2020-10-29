@@ -1,5 +1,5 @@
 <template>
-    <div class="MainContent">
+    <div class="MainPage">
     
         <router-link v-bind:to="{ name: 'authorization' }">
             Authorization
