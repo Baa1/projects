@@ -15,7 +15,7 @@ export default {
     },
     actions: {
         AUTHORIZATION({commit}, params) {
-            axios.post("http://localhost:3000/users/authorization", params)
+            axios.post("http://94.73.253.155:3000/users/authorization", params)
             .then(response => {
                 commit('SET_USER_ID', response.data);
             })
@@ -24,7 +24,7 @@ export default {
             });
         },
         REGISTRATION({commit}, params) {
-            axios.post("http://localhost:3000/users/registration", params)
+            axios.post("http://94.73.253.155:3000/users/registration", params)
             .then(response => {
                 commit('SET_USER_ID', response.data);
             })

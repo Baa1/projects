@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 router.post('/upload', (req, res) => {
-    let filedata = req.filedata;
+    let filedata = req.file;
+    console.log(filedata);
     if (!filedata)
         res.send('Uploading error...');
     else

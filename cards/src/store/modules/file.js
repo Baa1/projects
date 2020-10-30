@@ -13,7 +13,7 @@ export default {
     },
     actions: {
         UPLOAD_FILE({commit}, formData) {
-            axios.post('http://localhost:3000/files/upload', 
+            axios.post('http://94.73.253.155:3000/files/upload', 
                 formData,
                 {
                     headers: {
