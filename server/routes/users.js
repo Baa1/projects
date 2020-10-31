@@ -26,18 +26,12 @@ router.post('/authorization', function(req, res) {
                     userId: response[0]._id,
                     message: ""
                 });
-            } else {
-                res.send({
-                    userId: 0, 
-                    message: "Wrong username or password" 
-                });
-            }
-        } else {
-            res.send({ 
-                userId: 0, 
-                message: "Wrong username or password" 
-            });
+            } 
         }
+        res.send({
+            userId: 0, 
+            message: "Wrong username or password" 
+        });
     })
 });
 

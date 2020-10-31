@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const multer = require('multer');
 const cors = require('cors');
+const session = require('express-session');
 
 //Requiring routes
 const usersRouter = require('./routes/users');
@@ -30,6 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(multer({storage:storage}).single("filedata"));
 app.use(cors());
+app.use(session({ secret: 'key', saveUninitialized: true}));
 
 //Using routes
 app.use('/users', usersRouter);
