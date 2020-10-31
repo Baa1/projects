@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(multer({storage:storage}).single("filedata"));
 app.use(cors());
-app.use(session({ secret: 'key', saveUninitialized: true}));
+app.use(session({ secret: 'key', saveUninitialized: true, resave: true}));
 
 //Using routes
 app.use('/users', usersRouter);
