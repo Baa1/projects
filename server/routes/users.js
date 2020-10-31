@@ -1,8 +1,31 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../settings/db');
+var db = require('../settings/postgres');
 var sha1 = require('sha1');
 var crypto = require('crypto');
+var mongoose = require('../settings/mongo');
+
+const Schema = mongoose.Schema;
+
+const userScheme = new Schema({
+    login: String,
+    password: String,
+    salt: String
+}, 
+{
+    versionKey: false
+});
+const User = mongoose.model("User", userScheme);
+
+
+
+router.get("/", function(req, res){
+        
+    User.find({}, {_id: 0}, function(err, users) {
+        if (err) return console.log(err);
+        res.send(users);
+    });
+});
 
 router.post('/authorization', function(req, res) {
     db.any("SELECT * FROM users WHERE login = $1", req.body.login)

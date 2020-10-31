@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../settings/db');
+var db = require('../settings/postgres');
 
 router.post('/add', function(req, res) {
     db.any('INSERT INTO cards (name) VALUES ($1)', req.body.name)
