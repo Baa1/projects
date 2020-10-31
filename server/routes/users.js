@@ -57,23 +57,15 @@ router.post('/authorization', function(req, res) {
 router.post('/registration', function(req, res) {
     var salt = crypto.randomBytes(10).toString("hex");
     var password = sha1(req.body.password + salt);
-    var params = [
-        req.body.login,
+    var params = {
+        login: req.body.login,
         password,
         salt
-    ];
-    db.any("INSERT INTO users (login, password, salt) VALUES ($1, $2, $3) RETURNING id as userId", params)
-    .then(response => {
-        let user = {
-            id: 0,
-            login: ""
-        };
-        if (response && response.length > 0) {
-            res.send(user);
-        }
-    })
-    .catch(error => {
-        console.log(error);
+    };
+    const user = new User(params);
+    user.save((err, user) => {
+        if (err) return console.log(err);
+        res.send(user);
     });
 });
 
