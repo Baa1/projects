@@ -9,7 +9,6 @@ export default {
             return state.cards;
         },
         SETS(state) {
-            console.log(state.sets);
             return state.sets;
         }
     },
@@ -18,7 +17,6 @@ export default {
             state.cards = cards;
         },
         SET_SETS: (state, sets) => {
-            console.log(sets);
             state.sets = sets;
         }
     },

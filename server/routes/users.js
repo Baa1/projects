@@ -28,30 +28,27 @@ router.get("/", function(req, res){
 });
 
 router.post('/authorization', function(req, res) {
-    db.any("SELECT * FROM users WHERE login = $1", req.body.login)
-    .then(response => {
+    User.find({login: req.body.login}, (err, response) => {
+        if (err) return console.log(err);
         if (response && response.length === 1) {
-        if (sha1(req.body.password + response[0].salt) === response[0].password) {
+            if (sha1(req.body.password + response[0].salt) === response[0].password) {
+                res.send({
+                    userId: response[0]._id,
+                    message: ""
+                });
+            } else {
+                res.send({
+                    userId: 0, 
+                    message: "Wrong password" 
+                });
+            }
+        } else {
             res.send({ 
-            userId: response[0].id,
-            message: ""
+                userId: 0, 
+                message: `Couldn't find user with login ${req.body.login}` 
             });
-        } else {
-            res.send({
-            userId: 0, 
-            message: "Wrong password" 
-            });
-        }
-        } else {
-        res.send({ 
-            userId: 0, 
-            message: `Couldn't find user with login ${req.body.login}` 
-        });
         }
     })
-    .catch(error => {
-        console.log(error);
-    });
 });
 
 router.post('/registration', function(req, res) {
