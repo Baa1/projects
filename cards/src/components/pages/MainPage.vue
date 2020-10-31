@@ -7,11 +7,12 @@
         <router-link v-bind:to="{ name: 'registration' }">
             Registration
         </router-link>
-        
-        <CardsList/>
-        <ItemSelector v-bind:items="SETS"/>
-        <ItemSelector v-bind:items="items"/>
-        <FileUploader/>
+        <div v-if="USER_ID != 0">
+            <CardsList/>
+            <ItemSelector v-bind:items="SETS"/>
+            <ItemSelector v-bind:items="items"/>
+            <FileUploader/>
+        </div>
     </div>
 </template>
 
@@ -44,7 +45,8 @@ export default {
     },
     computed: {
         ...mapGetters([
-        'SETS'
+        'SETS',
+        'USER_ID'
         ])
     },
     methods: {

@@ -29,13 +29,13 @@ router.post('/authorization', function(req, res) {
             } else {
                 res.send({
                     userId: 0, 
-                    message: "Wrong password" 
+                    message: "Wrong username or password" 
                 });
             }
         } else {
             res.send({ 
                 userId: 0, 
-                message: `Couldn't find user with login ${req.body.login}` 
+                message: "Wrong username or password" 
             });
         }
     })

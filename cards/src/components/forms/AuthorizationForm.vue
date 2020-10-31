@@ -3,13 +3,14 @@
     <form v-on:submit.prevent="authorizationClicked">
       <input type="text" maxlength="30" v-model="login" placeholder="Login">
       <input type="password" maxlength="20" v-model="password" placeholder="Password">
+      <p>{{AUTH_MESSAGE}}</p>
       <button>Log In</button>
     </form>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'AuthorizationForm',
   data() {
@@ -18,18 +19,23 @@ export default {
       password: ""
     };
   },
+  computed: {
+    ...mapGetters([
+      'AUTH_MESSAGE',
+      'USER_ID'
+    ])
+  },
   methods: {
     ...mapActions([
       'AUTHORIZATION'
     ]),
-    authorizationClicked: function() {
-      this.AUTHORIZATION({
+    authorizationClicked: async function() {
+      let result =  await this.AUTHORIZATION({
         login: this.login, 
         password: this.password
-      })
-      .then(() => {
-        this.$router.push({path:'/'})
       });
+      console.log(result);
+      if (result === "") this.$router.push("/");
     }
   }
 }
