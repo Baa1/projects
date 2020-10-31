@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../settings/postgres');
-var sha1 = require('sha1');
-var crypto = require('crypto');
-var mongoose = require('../settings/mongo');
+const express = require('express');
+const router = express.Router();
+const sha1 = require('sha1');
+const crypto = require('crypto');
+const mongoose = require('../settings/mongo');
 
 const Schema = mongoose.Schema;
 
@@ -15,17 +14,8 @@ const userScheme = new Schema({
 {
     versionKey: false
 });
+
 const User = mongoose.model("User", userScheme);
-
-
-
-router.get("/", function(req, res){
-        
-    User.find({}, {_id: 0}, function(err, users) {
-        if (err) return console.log(err);
-        res.send(users);
-    });
-});
 
 router.post('/authorization', function(req, res) {
     User.find({login: req.body.login}, (err, response) => {
@@ -52,15 +42,15 @@ router.post('/authorization', function(req, res) {
 });
 
 router.post('/registration', function(req, res) {
-    var salt = crypto.randomBytes(10).toString("hex");
-    var password = sha1(req.body.password + salt);
-    var params = {
+    const salt = crypto.randomBytes(10).toString("hex");
+    const password = sha1(req.body.password + salt);
+    const params = {
         login: req.body.login,
         password,
         salt
     };
     const user = new User(params);
-    user.save((err, user) => {
+    user.save((err) => {
         if (err) return console.log(err);
         res.send(user);
     });

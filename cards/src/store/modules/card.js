@@ -22,7 +22,7 @@ export default {
     },
     actions: {
         GET_CARDS({commit}) {
-            axios.get('http://94.73.253.155:3000/cards/get_cards')
+            axios.get('http://localhost:3000/cards/get_cards')
             .then(response => {
                 commit('SET_CARDS', response.data);
             })
@@ -31,7 +31,7 @@ export default {
             });
         },
         GET_SETS({commit}) {
-            axios.get('http://94.73.253.155:3000/cards/get_sets')
+            axios.get('http://localhost:3000/cards/get_sets')
             .then(response => {
                 commit('SET_SETS', response.data);
             })
@@ -40,7 +40,7 @@ export default {
             });
         },
         ADD_CARD({commit}, params) {
-            axios.post('http://94.73.253.155:3000/cards/add', params)
+            axios.post('http://localhost:3000/cards/add', params)
             .then(response => {
                 commit('SET_CARDS', response.data);
             })

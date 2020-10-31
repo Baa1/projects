@@ -1,41 +1,48 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../settings/postgres');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('../settings/mongo');
+
+const Schema = mongoose.Schema;
+
+const cardScheme = new Schema({
+    name: String,
+}, 
+{
+    versionKey: false
+});
+
+const setScheme = new Schema({
+    name: String,
+}, 
+{
+    versionKey: false
+});
+
+const Card = mongoose.model("Card", cardScheme);
+const Set = mongoose.model("Set", setScheme);
 
 router.post('/add', function(req, res) {
-    db.any('INSERT INTO cards (name) VALUES ($1)', req.body.name)
-    .then(() => {
-        db.any('SELECT * FROM cards')
-        .then(data => {
-            res.send(data);
-        })
-        .catch(error => {
-            console.log(error);
-        })
-        
-    })
-    .catch(error => {
-        console.log(error);
+    const card = new Card({name: req.body.name});
+    card.save((err) => {
+        if (err) return console.log(err);
+        Card.find({}, (err, response) => {
+            if (err) return console.log(err);
+            res.send(response);
+        });
     });
 });
 
 router.get('/get_cards', function(req, res) {
-    db.any('SELECT * FROM cards')
-    .then(response => {
+    Card.find({}, (err, response) => {
+        if (err) return console.log(err);
         res.send(response);
-    })
-    .catch(error => {
-        console.log(error);
     });
 });
 
 router.get('/get_sets', function(req, res) {
-    db.any('SELECT * FROM sets')
-    .then(response => {
+    Set.find({}, (err, response) => {
+        if (err) return console.log(err);
         res.send(response);
-    })
-    .catch(error => {
-        console.log(error);
     });
 });
 
