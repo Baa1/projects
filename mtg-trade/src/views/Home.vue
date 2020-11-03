@@ -1,14 +1,16 @@
 <template>
   <div class="home">
+    <AuthorizationForm/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import AuthorizationForm from '../components/forms/AuthorizationForm'
 
 export default {
   name: 'Home',
   components: {
+    AuthorizationForm
   }
 }
 </script>
