@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import MainPage from '../components/pages/MainPage'
+import MainPage from '../view/Main'
 import AuthorizationForm from '../components/forms/AuthorizationForm'
 import RegistrationForm from '../components/forms/RegistrationForm'
 
