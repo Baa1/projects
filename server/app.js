@@ -8,9 +8,10 @@ const cors = require('cors');
 const session = require('express-session');
 
 //Requiring routes
-const usersRouter = require('./routes/users');
-const cardsRouter = require('./routes/cards');
+// const usersRouter = require('./routes/users');
+// const cardsRouter = require('./routes/cards');
 const filesRouter = require('./routes/files');
+const docsRouter = require('./routes/docs');
 
 const app = express();
 
@@ -34,8 +35,9 @@ app.use(cors());
 app.use(session({ secret: 'key', saveUninitialized: true, resave: true}));
 
 //Using routes
-app.use('/users', usersRouter);
-app.use('/cards', cardsRouter);
+// app.use('/users', usersRouter);
+// app.use('/cards', cardsRouter);
 app.use('/files', filesRouter);
+app.use('/docs', docsRouter);
 
 module.exports = app;
