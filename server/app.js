@@ -12,6 +12,7 @@ const session = require('express-session');
 // const cardsRouter = require('./routes/cards');
 const filesRouter = require('./routes/files');
 const docsRouter = require('./routes/docs');
+const testRouter = require('./routes/test');
 
 const app = express();
 
@@ -39,5 +40,6 @@ app.use(session({ secret: 'key', saveUninitialized: true, resave: true}));
 // app.use('/cards', cardsRouter);
 app.use('/files', filesRouter);
 app.use('/docs', docsRouter);
+app.use('/test', testRouter);
 
 module.exports = app;
