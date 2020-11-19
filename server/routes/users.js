@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const sha1 = require('sha1');
 const crypto = require('crypto');
-const mongoose = require('../settings/mongo');
+/*const mongoose = require('../settings/mongo');
 
 const Schema = mongoose.Schema;
 
@@ -48,6 +48,18 @@ router.post('/registration', function(req, res) {
         if (err) return console.log(err);
         res.send(user);
     });
+});*/
+
+router.get('/:userid', (req, res) => {
+    console.log(req.params);
+    console.log(req.query);
+    res.send("OK");
+});
+
+router.delete('/:id', (req, res) => {
+    db.any("DELETE FROM users WHERE id = $1", req.params.id)
+    .then()
+    .catch();
 });
 
 module.exports = router;

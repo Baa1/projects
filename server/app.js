@@ -8,7 +8,7 @@ const cors = require('cors');
 const session = require('express-session');
 
 //Requiring routes
-// const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
 // const cardsRouter = require('./routes/cards');
 const filesRouter = require('./routes/files');
 const docsRouter = require('./routes/docs');
@@ -24,7 +24,6 @@ var storage = multer.diskStorage({
         cb(null, Date.now() + path.extname(file.originalname));
     }
 });
-
 //Using plugins
 app.use(logger('dev'));
 app.use(express.json());
@@ -36,7 +35,7 @@ app.use(cors());
 app.use(session({ secret: 'key', saveUninitialized: true, resave: true}));
 
 //Using routes
-// app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 // app.use('/cards', cardsRouter);
 app.use('/files', filesRouter);
 app.use('/docs', docsRouter);
