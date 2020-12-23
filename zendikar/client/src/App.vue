@@ -20,7 +20,9 @@ export default {
 
 <style>
 #app {
-  background-color: darkgreen;
+  background-color: darkred;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 </style>

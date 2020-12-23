@@ -1,6 +1,6 @@
 <template>
   <div class="MainPage">
-    
+    <p>Main page of Zendikar MTG club</p>
   </div>
 </template>
 
