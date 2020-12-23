@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/register', function(req, res, next) {
+router.post('/register', (req, res) => {
   let params = [
     req.body.login,
     req.body.email,
@@ -10,7 +10,7 @@ router.post('/register', function(req, res, next) {
     req.body.patronymic,
     req.body.birthday
   ];
-  
+
   res.send(0);
 });
 
