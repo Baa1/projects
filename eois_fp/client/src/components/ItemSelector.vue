@@ -1,7 +1,12 @@
 <template>
     <div class="ItemSelector">
-        <select>
-            <option disabled value="" v-if="defaultOptionText">{{defaultOptionText}}</option>
+        <select v-model="selectedItem" v-on:change="$emit('selected-item-changed', selectedItem)">
+            <option v-bind:key="0"
+                    disabled value="" 
+                    v-if="defaultOptionText" 
+                    selected>
+                    {{defaultOptionText}}
+            </option>
             <option v-for="item in items" 
                     v-bind:key="item.id" 
                     v-bind:value="item">
@@ -15,7 +20,12 @@
 
 export default {
     name: 'ItemSelector',
-    props: ['items', 'defaultOptionText']
+    props: ['items', 'defaultOptionText'],
+    data() {
+        return {
+            selectedItem: null
+        }
+    }
 }
 </script>
 

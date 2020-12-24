@@ -20,10 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(async (req, res, next) => {
-    let sqlQuery = 'SELECT id, login, password, salt FROM users';
-    let users = await postgres.any(sqlQuery);
-    console.log(users);
     if (req.headers.authorization) {
+        let sqlQuery = 'SELECT id, login, password, salt FROM users';
+        let users = await postgres.any(sqlQuery);
         jwt.verify(req.headers.authorization.split(' ')[1], settings.TOKEN_KEY, (err, payload) => {
             if (err)
                 next();

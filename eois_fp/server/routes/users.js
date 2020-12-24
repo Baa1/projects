@@ -9,16 +9,18 @@ router.post('/registration', (req, res) => {
     let password = encryptObject.encryptedData;
     let salt = encryptObject.iv;
     let params = [
-    req.body.login,
-    password,
-    salt,
-    req.body.email,
-    req.body.name,
-    req.body.surname,
-    req.body.patronymic,
-    req.body.birthday
+        req.body.login,
+        password,
+        salt,
+        req.body.email,
+        req.body.name,
+        req.body.surname,
+        req.body.patronymic,
+        req.body.birthday,
+        req.body.roleId
     ];
-    let sqlQuery = 'INSERT INTO users (login, password, salt, email, name, surname, patronymic, birthday) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id';
+    let sqlQuery = 'INSERT INTO users (login, password, salt, email, name, surname, patronymic, birthday, role_id)' 
+        + ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id';
     postgres.one(sqlQuery, params)
         .then(data => {
             console.log(data);
