@@ -4,5 +4,7 @@ module.exports = {
     PG_USERNAME: 'postgres',
     PG_PASSWORD: 'baa1tasar',
     PG_HOST: 'localhost',
-    PG_PORT: 5432
+    PG_PORT: 5432,
+    KEY: 'uv1KOZ09WbHnzD0QbT4ncVvFVGf3u4Rv',
+    ALGORITHM: 'aes-256-cbc'
 }
