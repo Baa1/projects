@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
     let sqlQuery = 'SELECT * FROM roles';
     postgres.any(sqlQuery)
         .then(data => {
-            return res.status(200).send({data});
+            return res.status(200).send(data);
         })
         .catch(error => {
             console.log(error);
