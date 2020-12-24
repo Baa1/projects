@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const settings = require('./settings');
+const postgres = require('./db/postgres');
 
 const usersRouter = require('./routes/users');
 const firmsRouter = require('./routes/firms');
@@ -15,9 +17,29 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+app.use(async (req, res, next) => {
+    let sqlQuery = 'SELECT id, login, password, salt FROM users';
+    let users = await postgres.any(sqlQuery);
+    console.log(users);
+    if (req.headers.authorization) {
+        jwt.verify(req.headers.authorization.split(' ')[1], settings.TOKEN_KEY, (err, payload) => {
+            if (err)
+                next();
+            else if (payload) {
+                for (let user of users) {
+                    if (user.id === payload.id) {
+                        req.user = user;
+                        next();
+                    }
+                }        
+                if (!req.user) next();
+            }
+        });
+    }
+    next();
+});
 
 app.use('/users', usersRouter);
 app.use('/firms', firmsRouter);

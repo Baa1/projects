@@ -6,5 +6,6 @@ module.exports = {
     PG_HOST: 'localhost',
     PG_PORT: 5432,
     KEY: 'uv1KOZ09WbHnzD0QbT4ncVvFVGf3u4Rv',
-    ALGORITHM: 'aes-256-cbc'
+    ALGORITHM: 'aes-256-cbc',
+    TOKEN_KEY: 'q2cD-2Rrz-Z52w-hJK9'
 }
