@@ -1,3 +1,3 @@
 export default {
-    API_URL: 'http://loaclhost:8081'
+    API_URL: 'http://localhost:8081'
 }

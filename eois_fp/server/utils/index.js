@@ -1,3 +1,6 @@
+const crypto = require('crypto');
+const settings = require('../settings');
+
 function encrypt(text) { 
     // Defininf iv 
     const iv = crypto.randomBytes(16);

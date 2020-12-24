@@ -15,32 +15,32 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  name: 'RegistrationForm',
-  data() {
-    return {
-      login: '',
-      password: '',
-      email: '',
-      name: '',
-      surname: '',
-      patronymic: ''
-    }
-  },
-  methods: {
+    name: 'RegistrationForm',
+    data() {
+        return {
+            login: '',
+            password: '',
+            email: '',
+            name: '',
+            surname: '',
+            patronymic: ''
+        }
+    },
+    methods: {
     ...mapActions([
       'REGISTRATION'
     ]),
     registrationClicked: function() {
-      this.REGISTRATION({
-        login: this.login, 
-        password: this.password,
-        email: this.email,
-        name: this.name,
-        surname: this.surname,
-        patronymic: this.patronymic
-      });
+        this.REGISTRATION({
+            login: this.login, 
+            password: this.password,
+            email: this.email,
+            name: this.name,
+            surname: this.surname,
+            patronymic: this.patronymic
+            });
+        }
     }
-  }
 }
 </script>
 

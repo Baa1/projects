@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const settings = require('../settings');
-const crypto = require('crypto');
 const postgres = require('../db/postgres'); 
 const utils = require('../utils');
 
@@ -29,7 +28,6 @@ router.post('/registration', (req, res) => {
             console.log(error);
             return res.status(500).send({message: 'Unable create user.'});
         })
-    res.send(params);
 });
 
 router.post('/authorization', (req, res) => {
