@@ -32,7 +32,7 @@ function encrypt(text) {
     return decrypted.toString(); 
 } 
 
-router.post('/register', (req, res) => {
+router.post('/registration', (req, res) => {
     let encryptObject = encrypt(req.body.password);
     let password = encryptObject.encryptedData;
     let salt = encryptObject.iv;
@@ -59,7 +59,7 @@ router.post('/register', (req, res) => {
     res.send(params);
 });
 
-router.post('/authorize', (req, res) => {
+router.post('/authorization', (req, res) => {
 
 });
 
