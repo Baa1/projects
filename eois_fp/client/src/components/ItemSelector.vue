@@ -2,7 +2,8 @@
     <div class="ItemSelector">
         <select v-model="selectedItem" v-on:change="$emit('selected-item-changed', selectedItem)">
             <option v-bind:key="0"
-                    disabled value="" 
+                    disabled 
+                    value="defaultOptionText" 
                     v-if="defaultOptionText" 
                     selected>
                     {{defaultOptionText}}
