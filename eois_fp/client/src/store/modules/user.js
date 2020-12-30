@@ -7,7 +7,7 @@ export default {
     },
     getters: {
         USER_ID(state) {
-            return state.userId;
+            return state.user;
         },
         MESSAGE(state) {
             return state.message;
@@ -15,7 +15,7 @@ export default {
     },
     mutations: {
         SET_USER: (state, user) => {
-            state.userId = user;
+            state.user = user;
         },
         SET_MESSAGE: (state, message) => {
             state.message = message;
