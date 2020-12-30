@@ -33,7 +33,15 @@ router.post('/registration', (req, res) => {
 });
 
 router.post('/authorization', (req, res) => {
-
+    for (let user of users) {
+        if (req.body.login === user.login && req.body.password === user.password) {
+            return res.status(200).json({
+                id: user.id,
+                login: user.login,
+                token: jwt.sign({id: user.id}, settings.TOKEN_KEY)
+            });
+        }
+    }
 });
 
 module.exports = router;

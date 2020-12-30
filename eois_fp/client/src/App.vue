@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <RegistrationForm/>
+    <AuthorizationForm/>
   </div>
 </template>
 
 <script>
 import RegistrationForm from './components/RegistrationForm.vue'
+import AuthorizationForm from './components/AuthorizationForm.vue'
 
 export default {
   name: 'App',
   components: {
-    RegistrationForm
+    RegistrationForm,
+    AuthorizationForm
   }
 }
 </script>
