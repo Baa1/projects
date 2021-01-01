@@ -23,6 +23,7 @@ app.use(async (req, res, next) => {
     if (req.headers.authorization) {
         let sqlQuery = 'SELECT id, login, password, salt FROM users';
         let users = await postgres.any(sqlQuery);
+        console.log(req.headers.authorization);
         jwt.verify(req.headers.authorization.split(' ')[1], settings.TOKEN_KEY, (err, payload) => {
             if (err)
                 next();

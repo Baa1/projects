@@ -3,6 +3,7 @@ const router = express.Router();
 const settings = require('../settings');
 const postgres = require('../db/postgres'); 
 const utils = require('../utils');
+const jwt = require('jsonwebtoken');
 
 router.post('/registration', (req, res) => {
     let encryptObject = utils.encrypt(req.body.password);
@@ -32,15 +33,24 @@ router.post('/registration', (req, res) => {
         })
 });
 
-router.post('/authorization', (req, res) => {
-    for (let user of users) {
-        if (req.body.login === user.login && req.body.password === user.password) {
-            return res.status(200).json({
-                id: user.id,
-                login: user.login,
-                token: jwt.sign({id: user.id}, settings.TOKEN_KEY)
+router.post('/authorization', async (req, res) => {
+    let userSqlQuery = 'SELECT id, login, salt, password FROM users WHERE login = $1';
+    let data = await postgres.any(userSqlQuery, req.body.login);
+    if (data && data.length > 0) {
+        let credentials = {
+            iv: data[0].salt,
+            encryptedData: data[0].password
+        };
+        let password = utils.decrypt(credentials);
+        if (req.body.password === password) {
+            return res.status(200).send({
+                id: data[0].id,
+                login: data[0].login,
+                token: jwt.sign({id: data[0].id}, settings.TOKEN_KEY)
             });
         }
+    } else {
+        return res.status(404).send({message: 'User not found'});
     }
 });
 

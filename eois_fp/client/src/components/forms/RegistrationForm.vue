@@ -37,7 +37,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import ItemSelector from './ItemSelector'
+import ItemSelector from '../controls/ItemSelector'
 export default {
     name: 'RegistrationForm',
     components: {

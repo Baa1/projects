@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import RegistrationForm from './components/RegistrationForm.vue'
-import AuthorizationForm from './components/AuthorizationForm.vue'
+import RegistrationForm from './components/forms/AuthorizationForm.vue'
+import AuthorizationForm from './components/forms/RegistrationForm.vue'
 
 export default {
   name: 'App',
