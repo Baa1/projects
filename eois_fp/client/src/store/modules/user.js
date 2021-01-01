@@ -2,43 +2,42 @@ import axios from 'axios'
 import settings from '../../settings'
 export default {
     state: {
-        user: null,
+        userId: 0,
         message: '',
-        token: ''
+        token: '',
+        login: ''
     },
     getters: {
-        USER(state) {
-            return state.user;
+        USER_ID(state) {
+            return state.userId;
         },
         MESSAGE(state) {
             return state.message;
         },
         TOKEN(state) {
             return state.token;
+        },
+        LOGIN(state) {
+            return state.login;
         }
     },
     mutations: {
         SET_USER: (state, user) => {
-            state.user = user;
+            state.userId = user.id;
+            state.login = user.login;
+            state.token = user.token;
         },
         SET_MESSAGE: (state, message) => {
             state.message = message;
-        },
-        SET_TOKEN: (state, token) => {
-            state.token = token;
         }
     },
     actions: {
         async AUTHORIZATION({commit}, params) {
-            let config = {
-                headers: { Authorization: `Bearer ${this.token}` }
-            };
-            let response = await axios.post(`${settings.API_URL}/users/authorization`, params, config);
-            commit('SET_USER', response.data.user);
+            let response = await axios.post(`${settings.API_URL}/users/authorization`, params);
+            commit('SET_USER', response.data);
         },
         async REGISTRATION({commit}, params) {
             let response = await axios.post(`${settings.API_URL}/users/registration`, params);
-            console.log(response.data);
             commit('SET_MESSAGE', response.data.message);
         }
     }

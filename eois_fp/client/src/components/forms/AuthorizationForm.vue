@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'AuthorizationForm',
     data() {
@@ -23,6 +23,13 @@ export default {
             login: '',
             password: ''
         }
+    },
+    computed: {
+        ...mapGetters([
+            'USER_ID',
+            'LOGIN',
+            'TOKEN'
+        ])
     },
     methods: {
         ...mapActions([
@@ -36,6 +43,9 @@ export default {
                 login: this.login, 
                 password: this.password
             });
+            console.log(this.USER_ID);
+            console.log(this.TOKEN);
+            console.log(this.LOGIN);
         }
     }
 }
