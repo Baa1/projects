@@ -1,31 +1,28 @@
 <template>
   <div id="app">
-      <vue-tree-navigation :items="items" />
-      <router-view></router-view>
+    <router-nav v-if="USER_ID > 0"/>
+    <router-view/>
+    <Login v-if="USER_ID === 0"/>
   </div>
 </template>
 
 <script>
+import Login from './components/pages/Login.vue'
+import { mapGetters } from 'vuex'
 export default {
-    data() {
-        return {
-            items: [{ 
-                    name: 'Войти',
-                    path: 'login' 
-                },
-                { 
-                    name: 'Главная страница', 
-                    path: 'main', 
-                }
-            ],
-        }
-    }
+    components: {
+      Login
+    },
+    computed: {
+        ...mapGetters([
+            'USER_ID'
+        ])
+    },
 }
 </script>
 
 <style>
   #app {
-    display: flex;
-    justify-content: flex-start;
+    background-color: yellow;
   }
 </style>

@@ -43,7 +43,7 @@ export default {
                 login: this.login, 
                 password: this.password
             });
-            if (this.USER_ID > 0 && this.TOKEN != '') this.$router.push('/');
+            if (this.USER_ID > 0 && this.TOKEN != '') this.$router.push('/main');
         }
     }
 }
@@ -51,7 +51,6 @@ export default {
 
 <style scoped>
     .AuthorizationForm {
-        background-color: aqua;
         width: 300px;
         display: flex;
         justify-content: center;
