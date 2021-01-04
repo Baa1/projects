@@ -5,7 +5,8 @@ export default {
         userId: 0,
         message: '',
         token: '',
-        login: ''
+        login: '',
+        userInfo: null
     },
     getters: {
         USER_ID(state) {
@@ -19,6 +20,9 @@ export default {
         },
         LOGIN(state) {
             return state.login;
+        },
+        USER_INFO(state) {
+            return state.userInfo;
         }
     },
     mutations: {
@@ -29,6 +33,9 @@ export default {
         },
         SET_MESSAGE: (state, message) => {
             state.message = message;
+        },
+        SET_USER_INFO: (state, userInfo) => {
+            state.userInfo = userInfo;
         }
     },
     actions: {
@@ -39,6 +46,10 @@ export default {
         async REGISTRATION({commit}, params) {
             let response = await axios.post(`${settings.API_URL}/users/registration`, params);
             commit('SET_MESSAGE', response.data.message);
-        }
+        },
+        async GET_USER_INFO({commit}, params) {
+            let response = await axios.get(`${settings.API_URL}/users/${params}`);
+            commit('SET_USER_INFO', response.data);
+        },
     }
 }

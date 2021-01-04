@@ -4,6 +4,7 @@ const settings = require('../settings');
 const postgres = require('../db/postgres'); 
 const utils = require('../utils');
 const jwt = require('jsonwebtoken');
+const { query } = require('../db/postgres');
 
 router.post('/registration', (req, res) => {
     let encryptObject = utils.encrypt(req.body.password);
@@ -49,6 +50,17 @@ router.post('/authorization', async (req, res) => {
                 token: jwt.sign({id: data[0].id}, settings.TOKEN_KEY)
             });
         }
+    } else {
+        return res.status(404).send({message: 'User not found'});
+    }
+});
+
+router.get('/:id', async (req, res) => {
+    if (req.params.id > 0) {
+        let userSqlQuery = 'SELECT name, surname, patronymic, birthday FROM users WHERE id = $1';
+        let data = await postgres.one(userSqlQuery, req.params.id);
+        data.birthday = utils.getFormattedDate(new Date(data.birthday));
+        return res.status(200).send(data);
     } else {
         return res.status(404).send({message: 'User not found'});
     }

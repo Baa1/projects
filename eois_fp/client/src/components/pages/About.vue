@@ -3,30 +3,51 @@
       <h4>Общая информация</h4>
       <div>
           <h5>Фамилия</h5>
-          <p></p>
+          <p>{{userInfo.surname}}</p>
       </div>
       <div>
           <h5>Имя</h5>
-          <p></p>
+          <p>{{userInfo.name}}</p>
       </div>
       <div>
           <h5>Отчество</h5>
-          <p></p>
+          <p>{{userInfo.patronymic}}</p>
       </div>
       <div>
           <h5>Дата рождения</h5>
-          <p></p>
+          <p>{{userInfo.birthday}}</p>
       </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'About',
     data() {
         return {
-
+            userInfo: {
+                name: '',
+                surname: '',
+                patronymic: '',
+                birthday: ''
+            }
         }
+    },
+    computed: {
+        ...mapGetters([
+            'USER_INFO',
+            'USER_ID'
+        ])
+    },
+    methods: {
+        ...mapActions([
+            'GET_USER_INFO'
+        ]),
+    },
+    mounted: async function() {
+        await this.GET_USER_INFO(this.USER_ID);
+        this.userInfo = this.USER_INFO;
     }
 }
 </script>
