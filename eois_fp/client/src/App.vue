@@ -1,25 +1,31 @@
 <template>
   <div id="app">
-    <Login/>
+      <vue-tree-navigation :items="items" />
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Login from './components/pages/Login.vue'
-
 export default {
-  name: 'App',
-  components: {
-    Login
-  }
+    data() {
+        return {
+            items: [{ 
+                    name: 'Войти',
+                    path: 'login' 
+                },
+                { 
+                    name: 'Главная страница', 
+                    path: 'main', 
+                }
+            ],
+        }
+    }
 }
 </script>
 
 <style>
-#app {
-  display: flex;
-  background-color: blueviolet;
-  justify-content: center;
-  margin: 0 auto;
-}
+  #app {
+    display: flex;
+    justify-content: flex-start;
+  }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="MenuStrip">
-        <ul>
+        <ul class="MenuStripList">
             <li>Личный кабинет</li>
             <li>Фирма</li>
         </ul>
@@ -16,5 +16,8 @@ export default {
 </script>
 
 <style>
-
+    .MenuStripList {
+        display: flex;
+        justify-content: flex-start;
+    }
 </style>

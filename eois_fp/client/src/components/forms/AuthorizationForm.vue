@@ -43,9 +43,7 @@ export default {
                 login: this.login, 
                 password: this.password
             });
-            console.log(this.USER_ID);
-            console.log(this.TOKEN);
-            console.log(this.LOGIN);
+            if (this.USER_ID > 0 && this.TOKEN != '') this.$router.push('/');
         }
     }
 }
