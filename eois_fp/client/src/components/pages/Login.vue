@@ -1,16 +1,75 @@
 <template>
   <div class="Login">
-    <AuthorizationForm/>
+    <vue-form-generator :schema="schema" :model="model" :options="formOptions"></vue-form-generator>
   </div>
 </template>
 
 <script>
-import AuthorizationForm from '../forms/AuthorizationForm'
-
+import VueFormGenerator from 'vue-form-generator'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Login',
   components: {
-    AuthorizationForm
+      "vue-form-generator": VueFormGenerator.component
+  },
+  computed: {
+      ...mapGetters([
+          'USER_ID',
+          'LOGIN',
+          'TOKEN'
+      ])
+  },
+  data () {
+    return {
+      model: {
+        login: '',
+        password: ''
+      },
+      schema: {
+        fields: [
+          {
+            type: 'input',
+            inputType: 'text',
+            label: 'Логин',
+            model: 'login',
+            featured: true,
+            required: true
+          },
+          {
+            type: 'input',
+            inputType: 'password',
+            label: 'Пароль',
+            model: 'password',
+            placeholder: 'Your name',
+            featured: true,
+            required: true
+          },
+          {
+            type: 'submit',
+            buttonText: 'Войти',
+            onSubmit: this.authorizatoinClicked,
+            validateBeforeSubmit: true
+          }
+        ]
+      },
+      formOptions: {
+        validateAfterLoad: true,
+        validateAfterChanged: true,
+        validateAsync: true
+      }
+    }
+  },
+  methods: {
+    ...mapActions([
+        'AUTHORIZATION'
+    ]),
+    authorizatoinClicked: async function() {
+      await this.AUTHORIZATION({
+          login: this.model.login, 
+          password: this.model.password
+      });
+      if (this.USER_ID > 0 && this.TOKEN != '') this.$router.push('/main');
+    }
   }
 }
 </script>

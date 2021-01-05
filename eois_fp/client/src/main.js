@@ -4,9 +4,11 @@ import store from './store'
 import router from './router'
 import VueTreeNavigation from 'vue-tree-navigation';
 import RouterNav from 'vue-router-nav'
+import VueFormGenerator from 'vue-form-generator'
 
 Vue.use(VueTreeNavigation);
 Vue.use(RouterNav);
+Vue.use(VueFormGenerator);
 
 new Vue({
   store, 
