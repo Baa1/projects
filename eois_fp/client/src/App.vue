@@ -1,23 +1,23 @@
 <template>
   <div id="app">
-    <router-nav v-if="USER_ID > 0"/>
+    <router-nav/>
     <router-view/>
-    <Login v-if="USER_ID === 0"/>
   </div>
 </template>
 
 <script>
-import Login from './components/pages/Login.vue'
-import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
     components: {
-      Login
     },
-    computed: {
-        ...mapGetters([
-            'USER_ID'
-        ])
+    methods: {
+      ...mapActions([
+        'GET_ROLES'
+      ])
     },
+    mounted: async () => {
+      await this.GET_ROLES();
+    }
 }
 </script>
 

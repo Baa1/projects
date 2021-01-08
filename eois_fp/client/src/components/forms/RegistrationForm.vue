@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import ItemSelector from '../controls/ItemSelector'
 export default {
     name: 'RegistrationForm',
@@ -61,10 +61,6 @@ export default {
         ])
     },
     methods: {
-        ...mapActions([
-            'REGISTRATION',
-            'GET_ROLES'
-        ]),
         roleChanged: function(event) {
             this.roleId = event.id;
         },
@@ -80,9 +76,6 @@ export default {
                 birthday: this.birthday
             });
         }
-    },
-    mounted: async function() {
-        await this.GET_ROLES();
     }
 }
 </script>
