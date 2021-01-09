@@ -32,6 +32,7 @@ export default {
             inputType: 'text',
             label: 'Логин',
             model: 'login',
+            placeholder: 'login',
             featured: true,
             required: true
           },
@@ -40,7 +41,7 @@ export default {
             inputType: 'password',
             label: 'Пароль',
             model: 'password',
-            placeholder: 'Your name',
+            placeholder: 'password',
             featured: true,
             required: true
           },
