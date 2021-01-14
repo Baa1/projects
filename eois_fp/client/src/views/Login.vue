@@ -65,11 +65,7 @@ export default {
         'AUTHORIZATION'
     ]),
     authorizatoinClicked: async function() {
-      await this.AUTHORIZATION({
-          login: this.model.login, 
-          password: this.model.password
-      });
-      if (this.USER_ID > 0 && this.TOKEN != '') this.$router.push('/main');
+      console.log('submitted');
     }
   }
 }

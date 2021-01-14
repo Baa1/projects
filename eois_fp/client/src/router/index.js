@@ -10,11 +10,31 @@ Vue.use(Router);
 
 let router = new Router({
     routes: [
-        { name: 'Домой', path: '/', component: Home },
-        { name: 'О себе', path: '/about', component: About },
-        { name: 'Фирма', path: '/firm', component: Firm },
-        { name: 'Войти', path: '/login', component: Login },
-        { name: 'Регистрация', path: '/registration', component: Registration }
+        { 
+            name: 'home', 
+            path: '/', 
+            component: Home 
+        },
+        { 
+            name: 'about', 
+            path: '/about', 
+            component: About 
+        },
+        { 
+            name: 'firm', 
+            path: '/firm', 
+            component: Firm 
+        },
+        { 
+            name: 'login', 
+            path: '/login', 
+            component: Login 
+        },
+        { 
+            name: 'registration', 
+            path: '/registration', 
+            component: Registration 
+        }
     ]
 });
 

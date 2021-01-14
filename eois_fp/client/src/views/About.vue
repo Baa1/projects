@@ -46,8 +46,10 @@ export default {
         ]),
     },
     mounted: async function() {
-        await this.GET_USER_INFO(this.USER_ID);
-        this.userInfo = this.USER_INFO;
+        if (this.USER_ID > 0) {
+            await this.GET_USER_INFO(this.USER_ID);
+            this.userInfo = this.USER_INFO;
+        }
     }
 }
 </script>

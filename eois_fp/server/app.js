@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -19,6 +20,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+
+app.post('/token', async (req, res) => {
+    const refreshToken = req.body.token;
+    if (refreshToken == null) res.sendStatus(401);
+    let refreshTokens = await postgres.any('SELECT * FROM tokens');
+});
+
+app.post('/login', (req, res) => {
+    const user = {
+        login: req.body.login,
+        password: req.body.password
+    }
+    const accessToken = generateAccessToken(user);
+    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+    res.json({ accessToken: accessToken, refreshToken: refreshToken });
+});
+
+function generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30m' });
+}
+
 app.use(async (req, res, next) => {
     if (req.headers.authorization) {
         let sqlQuery = 'SELECT id, login, password, salt FROM users';

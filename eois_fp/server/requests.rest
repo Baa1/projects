@@ -1,0 +1,16 @@
+POST http://localhost:8081/login
+Content-Type: application/json
+
+{
+    "login": "Baa1",
+    "password": "1234"
+}
+
+###
+
+POST http://localhost:8081/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6IkJhYTEiLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE2MTA1ODk1NTl9.C8dY_kn_Pqg7iPZxoQs5bedlJ1doSjzmnQQaZuKNpkw"
+}
