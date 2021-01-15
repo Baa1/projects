@@ -6,6 +6,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const settings = require('./settings');
 const postgres = require('./db/postgres');
+const utils = require('./utils');
 
 const usersRouter = require('./routes/users');
 const firmsRouter = require('./routes/firms');
@@ -23,44 +24,66 @@ app.use(cors());
 
 app.post('/token', async (req, res) => {
     const refreshToken = req.body.token;
-    if (refreshToken == null) res.sendStatus(401);
-    let refreshTokens = await postgres.any('SELECT * FROM tokens');
+    if (refreshToken == null) return res.sendStatus(401);
+    let refreshTokens = await postgres.any('SELECT * FROM tokens WHERE token_value = $1'. refreshToken);
+    if (refreshTokens == null || refreshTokens.length == 0) return res.sendStatus(403);
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        const accessToken = generateAccessToken({ login: user.login });
+        res.json({ accessToken: accessToken });
+    });
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const user = {
         login: req.body.login,
         password: req.body.password
     }
-    const accessToken = generateAccessToken(user);
-    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-    res.json({ accessToken: accessToken, refreshToken: refreshToken });
+    let userSqlQuery = 'SELECT id, login, salt, password FROM users WHERE login = $1';
+    let data = await postgres.any(userSqlQuery, req.body.login);
+    if (data && data.length > 0) {
+        let credentials = {
+            iv: data[0].salt,
+            encryptedData: data[0].password
+        };
+        let password = utils.decrypt(credentials);
+        if (req.body.password === password) {
+            let payload = {
+                id: data[0].id,
+                login: data[0].login
+            }
+            const accessToken = generateAccessToken(payload);
+            const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET);
+            await postgres.none('INSERT INTO tokens (token_value) VALUES ($1)', refreshToken);
+            return res.status(200).send({
+                accessToken: accessToken,
+                refreshToken: refreshToken
+            });
+        } else {
+            return res.status(403).send({
+                message: 'Wrong password'
+            });
+        }
+    } else {
+        return res.status(404).send({
+            message: 'User not found'
+        });
+    }
 });
 
 function generateAccessToken(user) {
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30m' });
 }
 
-app.use(async (req, res, next) => {
-    if (req.headers.authorization) {
-        let sqlQuery = 'SELECT id, login, password, salt FROM users';
-        let users = await postgres.any(sqlQuery);
-        console.log(req.headers.authorization);
-        jwt.verify(req.headers.authorization.split(' ')[1], settings.TOKEN_KEY, (err, payload) => {
-            if (err)
-                next();
-            else if (payload) {
-                for (let user of users) {
-                    if (user.id === payload.id) {
-                        req.user = user;
-                        next();
-                    }
-                }        
-                if (!req.user) next();
-            }
-        });
-    }
-    next();
+app.use((req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (token == null) return res.status(401).send({ message: 'No token' });
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+        if (err) return res.status(403).send({ message: 'Invalid token'});
+        req.user = user;
+        next();
+    });
 });
 
 app.use('/users', usersRouter);

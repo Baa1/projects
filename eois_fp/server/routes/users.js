@@ -34,35 +34,17 @@ router.post('/registration', (req, res) => {
         })
 });
 
-router.post('/authorization', async (req, res) => {
-    let userSqlQuery = 'SELECT id, login, salt, password FROM users WHERE login = $1';
-    let data = await postgres.any(userSqlQuery, req.body.login);
-    if (data && data.length > 0) {
-        let credentials = {
-            iv: data[0].salt,
-            encryptedData: data[0].password
-        };
-        let password = utils.decrypt(credentials);
-        if (req.body.password === password) {
-            return res.status(200).send({
-                id: data[0].id,
-                login: data[0].login,
-                token: jwt.sign({id: data[0].id}, settings.TOKEN_KEY)
-            });
-        }
-    } else {
-        return res.status(404).send({message: 'User not found'});
-    }
-});
-
 router.get('/:id', async (req, res) => {
-    if (req.params.id > 0) {
-        let userSqlQuery = 'SELECT name, surname, patronymic, birthday FROM users WHERE id = $1';
-        let data = await postgres.one(userSqlQuery, req.params.id);
-        data.birthday = utils.getFormattedDate(new Date(data.birthday));
-        return res.status(200).send(data);
-    } else {
-        return res.status(404).send({message: 'User not found'});
+    console.log(req.user);
+    if (req.user) {
+        if (req.params.id > 0) {
+            let userSqlQuery = 'SELECT name, surname, patronymic, birthday FROM users WHERE id = $1';
+            let data = await postgres.one(userSqlQuery, req.params.id);
+            data.birthday = utils.getFormattedDate(new Date(data.birthday));
+            return res.status(200).send(data);
+        } else {
+            return res.status(404).send({message: 'User not found'});
+        }
     }
 });
 
