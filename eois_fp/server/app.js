@@ -22,23 +22,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-app.post('/token', async (req, res) => {
-    const refreshToken = req.body.token;
-    if (refreshToken == null) return res.sendStatus(401);
-    let refreshTokens = await postgres.any('SELECT * FROM tokens WHERE token_value = $1', refreshToken);
-    if (refreshTokens == null || refreshTokens.length == 0) return res.sendStatus(403);
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403);
-        const accessToken = generateAccessToken({ login: user.login });
-        return res.json({ accessToken: accessToken });
-    });
-});
-
-app.delete('/logout', (req, res) => {
-    postgres.none('DELETE FROM tokens WHERE token_value = $1', req.body.token);
-    res.sendStatus(204);
-});
-
 app.post('/login', async (req, res) => {
     const user = {
         login: req.body.login,
@@ -72,10 +55,28 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.delete('/logout', (req, res) => {
+    postgres.none('DELETE FROM tokens WHERE token_value = $1', req.body.token);
+    res.sendStatus(204);
+});
+
+app.post('/refresh', async (req, res) => {
+    const refreshToken = req.body.token;
+    if (refreshToken == null) return res.sendStatus(401);
+    let refreshTokens = await postgres.any('SELECT * FROM tokens WHERE token_value = $1', refreshToken);
+    if (refreshTokens == null || refreshTokens.length == 0) return res.sendStatus(403);
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        const accessToken = generateAccessToken({ login: user.login });
+        return res.json({ accessToken: accessToken });
+    });
+});
+
 function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30m' });
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
 }
 
+//auth middlware
 app.use((req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];

@@ -3,7 +3,6 @@ export default {
     state: {
         accessToken: '',
         refreshToken: '',
-        message: '',
         userInfo: null
     },
     getters: {
@@ -21,9 +20,6 @@ export default {
         SET_REFRESH_TOKEN: (state, refreshToken) => {
             state.refreshToken = refreshToken;
         },
-        SET_MESSAGE: (state, message) => {
-            state.message = message;
-        },
         SET_USER_INFO: (state, userInfo) => {
             state.userInfo = userInfo;
         }
@@ -34,12 +30,19 @@ export default {
             commit('SET_ACCESS_TOKEN', response.data.accessToken);
             commit('SET_REFRESH_TOKEN', response.data.refreshToken);
         },
-        async REGISTRATION({ commit }, params) {
-            let response = await axios.post('users/registration', params);
-            commit('SET_MESSAGE', response.data.message);
+        async LOGOUT(_, params) {
+            await axios.delete('logout', params);
+        },
+        async REGISTRATION(_, params) {
+            await axios.post('users/registration', params);
         },
         async GET_USER_INFO({ commit }, params) {
-            let response = await axios.get(`users/${params}`);
+            let response = await axios.get(`users/${params}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + this.state.accessToken
+                }
+            });
             commit('SET_USER_INFO', response.data);
         },
     }
