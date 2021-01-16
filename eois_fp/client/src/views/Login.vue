@@ -14,9 +14,8 @@ export default {
   },
   computed: {
       ...mapGetters([
-          'USER_ID',
-          'LOGIN',
-          'TOKEN'
+          'ACCESS_TOKEN',
+          'REFRESH_TOKEN'
       ])
   },
   data () {
@@ -62,10 +61,12 @@ export default {
   },
   methods: {
     ...mapActions([
-        'AUTHORIZATION'
+        'LOGIN'
     ]),
     authorizatoinClicked: async function() {
-      console.log('submitted');
+      await this.LOGIN(this.model);
+      console.log(this.ACCESS_TOKEN);
+      console.log(this.REFRESH_TOKEN);
     }
   }
 }

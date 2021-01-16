@@ -25,13 +25,18 @@ app.use(cors());
 app.post('/token', async (req, res) => {
     const refreshToken = req.body.token;
     if (refreshToken == null) return res.sendStatus(401);
-    let refreshTokens = await postgres.any('SELECT * FROM tokens WHERE token_value = $1'. refreshToken);
+    let refreshTokens = await postgres.any('SELECT * FROM tokens WHERE token_value = $1', refreshToken);
     if (refreshTokens == null || refreshTokens.length == 0) return res.sendStatus(403);
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.sendStatus(403);
         const accessToken = generateAccessToken({ login: user.login });
-        res.json({ accessToken: accessToken });
+        return res.json({ accessToken: accessToken });
     });
+});
+
+app.delete('/logout', (req, res) => {
+    postgres.none('DELETE FROM tokens WHERE token_value = $1', req.body.token);
+    res.sendStatus(204);
 });
 
 app.post('/login', async (req, res) => {
@@ -55,19 +60,15 @@ app.post('/login', async (req, res) => {
             const accessToken = generateAccessToken(payload);
             const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET);
             await postgres.none('INSERT INTO tokens (token_value) VALUES ($1)', refreshToken);
-            return res.status(200).send({
+            return res.json({
                 accessToken: accessToken,
                 refreshToken: refreshToken
             });
         } else {
-            return res.status(403).send({
-                message: 'Wrong password'
-            });
+            return res.sendStatus(403);
         }
     } else {
-        return res.status(404).send({
-            message: 'User not found'
-        });
+        return res.sendStatus(403);
     }
 });
 
@@ -78,9 +79,9 @@ function generateAccessToken(user) {
 app.use((req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
-    if (token == null) return res.status(401).send({ message: 'No token' });
+    if (token == null) return res.sendStatus(401);
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err) return res.status(403).send({ message: 'Invalid token'});
+        if (err) return res.sendStatus(403);
         req.user = user;
         next();
     });

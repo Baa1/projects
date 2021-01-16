@@ -1,35 +1,25 @@
 import axios from 'axios'
-import settings from '../../settings'
 export default {
     state: {
-        userId: 0,
+        accessToken: '',
+        refreshToken: '',
         message: '',
-        token: '',
-        login: '',
         userInfo: null
     },
     getters: {
-        USER_ID(state) {
-            return state.userId;
+        ACCESS_TOKEN(state) {
+            return state.accessToken;
         },
-        MESSAGE(state) {
-            return state.message;
-        },
-        TOKEN(state) {
-            return state.token;
-        },
-        LOGIN(state) {
-            return state.login;
-        },
-        USER_INFO(state) {
-            return state.userInfo;
+        REFRESH_TOKEN(state) {
+            return state.refreshToken;
         }
     },
     mutations: {
-        SET_USER: (state, user) => {
-            state.userId = user.id;
-            state.login = user.login;
-            state.token = user.token;
+        SET_ACCESS_TOKEN: (state, accessToken) => {
+            state.accessToken = accessToken;
+        },
+        SET_REFRESH_TOKEN: (state, refreshToken) => {
+            state.refreshToken = refreshToken;
         },
         SET_MESSAGE: (state, message) => {
             state.message = message;
@@ -39,16 +29,17 @@ export default {
         }
     },
     actions: {
-        async AUTHORIZATION({commit}, params) {
-            let response = await axios.post(`${settings.API_URL}/users/authorization`, params);
-            commit('SET_USER', response.data);
+        async LOGIN({ commit }, params) {
+            let response = await axios.post('login', params);
+            commit('SET_ACCESS_TOKEN', response.data.accessToken);
+            commit('SET_REFRESH_TOKEN', response.data.refreshToken);
         },
-        async REGISTRATION({commit}, params) {
-            let response = await axios.post(`${settings.API_URL}/users/registration`, params);
+        async REGISTRATION({ commit }, params) {
+            let response = await axios.post('users/registration', params);
             commit('SET_MESSAGE', response.data.message);
         },
-        async GET_USER_INFO({commit}, params) {
-            let response = await axios.get(`${settings.API_URL}/users/${params}`);
+        async GET_USER_INFO({ commit }, params) {
+            let response = await axios.get(`users/${params}`);
             commit('SET_USER_INFO', response.data);
         },
     }

@@ -2,9 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
-import VueTreeNavigation from 'vue-tree-navigation';
+import VueTreeNavigation from 'vue-tree-navigation'
 import RouterNav from 'vue-router-nav'
 import VueFormGenerator from 'vue-form-generator'
+import axios from 'axios'
+import settings from './settings'
+
+axios.defaults.baseURL = settings.API_URL;
 
 Vue.use(VueTreeNavigation);
 Vue.use(RouterNav);

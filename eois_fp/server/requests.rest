@@ -12,11 +12,11 @@ POST http://localhost:8081/token
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6IkJhYTEiLCJwYXNzd29yZCI6IjEyMzQiLCJpYXQiOjE2MTA1ODk1NTl9.C8dY_kn_Pqg7iPZxoQs5bedlJ1doSjzmnQQaZuKNpkw"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibG9naW4iOiJwb3RvbG92c2theWFfZXZhIiwiaWF0IjoxNjEwNzY1MjY2fQ.Eb42CgB4p8kzTqMi53dx0gx03q1twdaWarKjoUwTur0"
 }
 
 ###
 
 GET http://localhost:8081/users/4
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibG9naW4iOiJwb3RvbG92c2theWFfZXZhIiwiaWF0IjoxNjEwNzQ5MDQ2LCJleHAiOjE2MTA3NTA4NDZ9.mw4sF7L0EEvcp_LU38cAeEtEQzM47tdKdunZUxBbE3I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibG9naW4iOiJwb3RvbG92c2theWFfZXZhIiwiaWF0IjoxNjEwNzY1MjY2LCJleHAiOjE2MTA3NjcwNjZ9.Sqa6cyJjXT6DlEF2z2SzFQoHkkIByth5l_GsxAsR8
