@@ -8,6 +8,8 @@ import VueFormGenerator from 'vue-form-generator'
 import axios from 'axios'
 import settings from './settings'
 
+require('@/store/subscriber');
+
 axios.defaults.baseURL = settings.API_URL;
 
 Vue.use(VueTreeNavigation);
