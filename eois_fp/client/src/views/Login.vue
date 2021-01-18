@@ -14,8 +14,7 @@ export default {
   },
   computed: {
       ...mapGetters([
-          'ACCESS_TOKEN',
-          'REFRESH_TOKEN'
+          'AUTHENTICATED',
       ])
   },
   data () {
@@ -65,8 +64,9 @@ export default {
     ]),
     authorizatoinClicked: async function() {
       await this.LOGIN(this.model);
-      console.log(this.ACCESS_TOKEN);
-      console.log(this.REFRESH_TOKEN);
+      if (this.AUTHENTICATED) this.$router.replace({
+        name: 'about'
+      })
     }
   }
 }

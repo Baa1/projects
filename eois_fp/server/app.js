@@ -45,7 +45,8 @@ app.post('/login', async (req, res) => {
             await postgres.none('INSERT INTO tokens (token_value) VALUES ($1)', refreshToken);
             return res.json({
                 accessToken: accessToken,
-                refreshToken: refreshToken
+                refreshToken: refreshToken,
+                userInfo: payload
             });
         } else {
             return res.sendStatus(403);

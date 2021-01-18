@@ -37,7 +37,6 @@ export default {
     computed: {
         ...mapGetters([
             'USER_INFO',
-            'USER_ID'
         ])
     },
     methods: {
@@ -46,14 +45,12 @@ export default {
         ]),
     },
     mounted: async function() {
-        if (this.USER_ID > 0) {
-            await this.GET_USER_INFO(this.USER_ID);
-            this.userInfo = this.USER_INFO;
+        if (this.USER_INFO && this.USER_INFO.id > 0) {
+            await this.GET_USER_INFO(this.USER_INFO.id);
         }
     }
 }
 </script>
-
 <style>
 
 </style>
