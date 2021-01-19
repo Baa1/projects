@@ -12,7 +12,7 @@
         
         <template v-if="AUTHENTICATED">
             <li>
-                {{USER_INFO.login}}
+                {{USER.login}}
             </li>
             <li>
                 <router-link
@@ -49,7 +49,7 @@ export default {
     computed: {
         ...mapGetters([
             'AUTHENTICATED',
-            'USER_INFO'
+            'USER'
         ])
     }
 }

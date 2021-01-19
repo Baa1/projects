@@ -3,6 +3,7 @@ export default {
     state: {
         accessToken: null,
         refreshToken: null,
+        user: null,
         userInfo: null
     },
     getters: {
@@ -12,11 +13,14 @@ export default {
         REFRESH_TOKEN(state) {
             return state.refreshToken;
         },
+        USER(state) {
+            return state.user;
+        },
         USER_INFO(state) {
             return state.userInfo;
         },
         AUTHENTICATED(state) {
-            return state.accessToken && state.userInfo;
+            return state.accessToken && state.user;
         }
     },
     mutations: {
@@ -26,31 +30,45 @@ export default {
         SET_REFRESH_TOKEN: (state, refreshToken) => {
             state.refreshToken = refreshToken;
         },
+        SET_USER: (state, user) => {
+            state.user = user;
+        },
         SET_USER_INFO: (state, userInfo) => {
             state.userInfo = userInfo;
         },
         LOGOUT: (state) => {
-            state.accessToken = '';
-            state.refreshToken = '';
-            state.userInfo = {
-                id: 0,
-                login: ''
-            }
+            state.accessToken = null;
+            state.refreshToken = null;
+            state.user = null;
+            state.userInfo = null;
         }
     },
     actions: {
-        async LOGIN({ commit }, params) {
+        async LOGIN({ commit, dispatch }, params) {
             try {
                 let response = await axios.post('login', params);
-                commit('SET_ACCESS_TOKEN', response.data.accessToken);
                 commit('SET_REFRESH_TOKEN', response.data.refreshToken);
-                commit('SET_USER_INFO', response.data.userInfo);
+                return dispatch('ATTEMPT', response.data.accessToken);
             } catch (error) {
+                commit('SET_REFRESH_TOKEN', null);
+                return;
+            }
+        },
+        async ATTEMPT({ commit }, accessToken) {
+            if (accessToken) {
+                commit('SET_ACCESS_TOKEN', accessToken);
+            }
+            if (!this.state.accessToken) {
+                return;
+            }
+            try {
+                let response = await axios.get('/attempt');
+                commit('SET_USER', response.data);
+            } catch (error) {
+                commit('SET_USER', null);
                 commit('SET_ACCESS_TOKEN', null);
                 commit('SET_REFRESH_TOKEN', null);
-                commit('SET_USER_INFO', null);
             }
-            
         },
         async LOGOUT({ commit }, params) {
             await axios.delete('logout', params);
