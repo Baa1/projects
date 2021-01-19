@@ -35,12 +35,6 @@ export default {
         },
         SET_USER_INFO: (state, userInfo) => {
             state.userInfo = userInfo;
-        },
-        LOGOUT: (state) => {
-            state.accessToken = null;
-            state.refreshToken = null;
-            state.user = null;
-            state.userInfo = null;
         }
     },
     actions: {
@@ -48,7 +42,7 @@ export default {
             try {
                 let response = await axios.post('login', params);
                 commit('SET_REFRESH_TOKEN', response.data.refreshToken);
-                dispatch('ATTEMPT', response.data.accessToken);
+                return dispatch('ATTEMPT', response.data.accessToken);
             } catch (error) {
                 commit('SET_REFRESH_TOKEN', null);
                 commit('SET_ACCESS_TOKEN', null);
@@ -73,7 +67,10 @@ export default {
         },
         async LOGOUT({ commit }, params) {
             await axios.delete('logout', params);
-            commit('LOGOUT');
+            commit('SET_USER', null);
+            commit('SET_USER_INFO', null);
+            commit('SET_ACCESS_TOKEN', null);
+            commit('SET_REFRESH_TOKEN', null);
         },
         async REGISTRATION(_, params) {
             await axios.post('users/registration', params);

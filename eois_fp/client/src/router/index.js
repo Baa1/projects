@@ -5,6 +5,7 @@ import About from '../views/About.vue'
 import Firm from '../views/Firm.vue'
 import Login from '../views/Login.vue'
 import Registration from '../views/Registration.vue'
+import store from '@/store'
 
 Vue.use(Router);
 
@@ -18,12 +19,28 @@ let router = new Router({
         { 
             name: 'about', 
             path: '/about', 
-            component: About 
+            component: About,
+            beforeEnter: (to, from, next) => {
+                if (!store.getters['AUTHENTICATED']) {
+                    return next({
+                        name: 'login'
+                    });
+                }
+                next();
+            }
         },
         { 
             name: 'firm', 
             path: '/firm', 
-            component: Firm 
+            component: Firm,
+            beforeEnter: (to, from, next) => {
+                if (!store.getters['AUTHENTICATED']) {
+                    return next({
+                        name: 'login'
+                    });
+                }
+                next();
+            }
         },
         { 
             name: 'login', 
@@ -33,7 +50,15 @@ let router = new Router({
         { 
             name: 'registration', 
             path: '/registration', 
-            component: Registration 
+            component: Registration,
+            beforeEnter: (to, from, next) => {
+                if (!store.getters['AUTHENTICATED']) {
+                    return next({
+                        name: 'login'
+                    });
+                }
+                next();
+            }
         }
     ]
 });

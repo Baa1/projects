@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const settings = require('../settings');
 const postgres = require('../db/postgres'); 
 const utils = require('../utils');
-const jwt = require('jsonwebtoken');
-const { query } = require('../db/postgres');
 
 router.post('/registration', (req, res) => {
     let encryptObject = utils.encrypt(req.body.password);
@@ -35,7 +32,6 @@ router.post('/registration', (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    console.log(req.user);
     if (req.user) {
         if (req.params.id > 0) {
             let userSqlQuery = 'SELECT name, surname, patronymic, birthday FROM users WHERE id = $1';

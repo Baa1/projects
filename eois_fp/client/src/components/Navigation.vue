@@ -24,7 +24,7 @@
                 </router-link>
             </li>
             <li>
-                <a href="#">
+                <a href="#" @click.prevent="logoutClicked">
                     Log Out
                 </a>
             </li>
@@ -43,7 +43,7 @@
     </ul>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'Navigation',
     computed: {
@@ -51,6 +51,19 @@ export default {
             'AUTHENTICATED',
             'USER'
         ])
+    },
+    methods: {
+        ...mapActions([
+            'LOGOUT'
+        ]),
+        logoutClicked() {
+            console.log(this);
+            this.LOGOUT().then(() => {
+                this.$router.replace({
+                    name: 'home'
+                });
+            });
+        }
     }
 }
 </script>

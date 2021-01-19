@@ -62,8 +62,9 @@ export default {
     ...mapActions([
         'LOGIN'
     ]),
-    authorizatoinClicked: async function() {
+    async authorizatoinClicked() {
       await this.LOGIN(this.model);
+      console.log(this.AUTHENTICATED);
       if (this.AUTHENTICATED) this.$router.replace({
         name: 'about'
       })
