@@ -12,10 +12,10 @@ axios.defaults.baseURL = settings.API_URL;
 
 Vue.use(VueFormGenerator);
 
-store.dispatch('ATTEMPT', localStorage.getItem('accessToken'));
-
-new Vue({
-  store, 
-  router,
-  render: h => h(App)
-}).$mount('#app')
+store.dispatch('ATTEMPT', localStorage.getItem('accessToken')).then(() => {
+  new Vue({
+    store, 
+    router,
+    render: h => h(App)
+  }).$mount('#app');
+});

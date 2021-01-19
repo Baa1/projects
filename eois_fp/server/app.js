@@ -55,14 +55,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/attempt', (req, res) => {
-    if (req.user) {
-        return res.send(user);
-    } else {
-        return res.sendStatus(401);
-    }
-});
-
 app.delete('/logout', (req, res) => {
     postgres.none('DELETE FROM tokens WHERE token_value = $1', req.body.token);
     res.sendStatus(204);
@@ -94,6 +86,14 @@ app.use((req, res, next) => {
         req.user = user;
         next();
     });
+});
+
+app.get('/attempt', (req, res) => {
+    if (req.user) {
+        return res.send(req.user);
+    } else {
+        return res.sendStatus(401);
+    }
 });
 
 app.use('/users', usersRouter);

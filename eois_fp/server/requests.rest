@@ -8,6 +8,12 @@ Content-Type: application/json
 
 ###
 
+GET http://localhost:8081/attempt
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibG9naW4iOiJwb3RvbG92c2theWFfZXZhIiwiaWF0IjoxNjExMDc2NTY1LCJleHAiOjE2MTEwNzc0NjV9.q29_JM15XgWjeo0irwfEqFulRyz4QMFAqba49Tw5JrM
+
+###
+
 POST http://localhost:8081/refresh
 Content-Type: application/json
 

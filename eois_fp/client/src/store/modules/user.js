@@ -48,9 +48,10 @@ export default {
             try {
                 let response = await axios.post('login', params);
                 commit('SET_REFRESH_TOKEN', response.data.refreshToken);
-                return dispatch('ATTEMPT', response.data.accessToken);
+                dispatch('ATTEMPT', response.data.accessToken);
             } catch (error) {
                 commit('SET_REFRESH_TOKEN', null);
+                commit('SET_ACCESS_TOKEN', null);
                 return;
             }
         },
@@ -58,7 +59,7 @@ export default {
             if (accessToken) {
                 commit('SET_ACCESS_TOKEN', accessToken);
             }
-            if (!this.state.accessToken) {
+            if (!this.state.user.accessToken) {
                 return;
             }
             try {

@@ -3,19 +3,19 @@
       <h4>Общая информация</h4>
       <div>
           <h5>Фамилия</h5>
-          <p>{{userInfo.surname}}</p>
+          <p>{{USER_INFO.surname}}</p>
       </div>
       <div>
           <h5>Имя</h5>
-          <p>{{userInfo.name}}</p>
+          <p>{{USER_INFO.name}}</p>
       </div>
       <div>
           <h5>Отчество</h5>
-          <p>{{userInfo.patronymic}}</p>
+          <p>{{USER_INFO.patronymic}}</p>
       </div>
       <div>
           <h5>Дата рождения</h5>
-          <p>{{userInfo.birthday}}</p>
+          <p>{{USER_INFO.birthday}}</p>
       </div>
   </div>
 </template>
@@ -24,19 +24,10 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'About',
-    data() {
-        return {
-            userInfo: {
-                name: '',
-                surname: '',
-                patronymic: '',
-                birthday: ''
-            }
-        }
-    },
     computed: {
         ...mapGetters([
-            'USER_INFO',
+            'USER',
+            'USER_INFO'
         ])
     },
     methods: {
@@ -45,8 +36,8 @@ export default {
         ]),
     },
     mounted: async function() {
-        if (this.USER_INFO && this.USER_INFO.id > 0) {
-            await this.GET_USER_INFO(this.USER_INFO.id);
+        if (this.USER && this.USER.id > 0) {
+            await this.GET_USER_INFO(this.USER.id);
         }
     }
 }
