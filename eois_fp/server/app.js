@@ -42,8 +42,11 @@ app.post('/login', async (req, res) => {
                 role: data[0].role
             }
             const accessToken = generateAccessToken(payload);
+            const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET);
+            await postgres.none('INSERT INTO tokens (token_value) VALUES ($1)', refreshToken);
             return res.json({
-                accessToken: accessToken
+                accessToken: accessToken,
+                refreshToken: refreshToken
             });
         } else {
             return res.sendStatus(403);
@@ -54,7 +57,20 @@ app.post('/login', async (req, res) => {
 });
 
 app.delete('/logout', (req, res) => {
+    postgres.none('DELETE FROM tokens WHERE token_value = $1', req.body.token);
     res.sendStatus(204);
+});
+
+app.post('/refresh', async (req, res) => {
+    const refreshToken = req.body.token;
+    if (refreshToken == null) return res.sendStatus(401);
+    let refreshTokens = await postgres.any('SELECT * FROM tokens WHERE token_value = $1', refreshToken);
+    if (refreshTokens == null || refreshTokens.length == 0) return res.sendStatus(403);
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        const accessToken = generateAccessToken({ login: user.login });
+        return res.json({ accessToken: accessToken });
+    });
 });
 
 function generateAccessToken(user) {
