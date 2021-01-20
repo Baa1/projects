@@ -49,7 +49,7 @@ export default {
                 return;
             }
             try {
-                let response = await axios.get('/attempt');
+                let response = await axios.get('attempt');
                 commit('SET_USER', response.data);
             } catch (error) {
                 commit('SET_USER', null);

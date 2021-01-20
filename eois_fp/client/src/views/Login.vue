@@ -17,7 +17,7 @@ export default {
           'AUTHENTICATED',
       ])
   },
-  data () {
+  data() {
     return {
       model: {
         login: '',
@@ -64,10 +64,9 @@ export default {
     ]),
     async authorizatoinClicked() {
       await this.LOGIN(this.model);
-      console.log(this.AUTHENTICATED);
       if (this.AUTHENTICATED) this.$router.replace({
         name: 'about'
-      })
+      });
     }
   }
 }

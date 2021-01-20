@@ -1,5 +1,4 @@
 import axios from 'axios'
-import settings from '../../settings'
 export default {
     state: {
         roles: [],
@@ -15,8 +14,8 @@ export default {
         }
     },
     actions: {
-        async GET_ROLES({commit}) {
-            let response = await axios.get(`${settings.API_URL}/roles`);
+        async GET_ROLES({ commit }) {
+            let response = await axios.get('roles');
             commit('SET_ROLES', response.data);
         }
     }

@@ -1,21 +1,21 @@
 <template>
-  <div id="app">
-    <Navigaton/>
-    <router-view/>
-  </div>
+	<div id="app">
+		<Navigaton/>
+		<router-view/>
+	</div>
 </template>
 
 <script>
 import Navigaton from '../src/components/Navigation.vue'
 export default {
-    components: {
-      Navigaton
-    }
+	components: {
+		Navigaton
+	}
 }
 </script>
 
 <style>
-  #app {
-    background-color: yellow;
-  }
+	#app {
+		background-color: yellow;
+	}
 </style>
