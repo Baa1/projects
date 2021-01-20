@@ -27,7 +27,7 @@ app.post('/login', async (req, res) => {
         login: req.body.login,
         password: req.body.password
     }
-    let userSqlQuery = 'SELECT id, login, salt, password FROM users WHERE login = $1';
+    let userSqlQuery = 'SELECT users.id as id, login, salt, password, roles.name as role FROM users LEFT JOIN roles ON roles.id = users.role_id WHERE login = $1';
     let data = await postgres.any(userSqlQuery, req.body.login);
     if (data && data.length > 0) {
         let credentials = {
@@ -38,7 +38,8 @@ app.post('/login', async (req, res) => {
         if (req.body.password === password) {
             let payload = {
                 id: data[0].id,
-                login: data[0].login
+                login: data[0].login,
+                role: data[0].role
             }
             const accessToken = generateAccessToken(payload);
             return res.json({
