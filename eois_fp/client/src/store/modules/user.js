@@ -10,9 +10,6 @@ export default {
         ACCESS_TOKEN(state) {
             return state.accessToken;
         },
-        REFRESH_TOKEN(state) {
-            return state.refreshToken;
-        },
         USER(state) {
             return state.user;
         },
@@ -27,9 +24,6 @@ export default {
         SET_ACCESS_TOKEN: (state, accessToken) => {
             state.accessToken = accessToken;
         },
-        SET_REFRESH_TOKEN: (state, refreshToken) => {
-            state.refreshToken = refreshToken;
-        },
         SET_USER: (state, user) => {
             state.user = user;
         },
@@ -41,10 +35,8 @@ export default {
         async LOGIN({ commit, dispatch }, params) {
             try {
                 let response = await axios.post('login', params);
-                commit('SET_REFRESH_TOKEN', response.data.refreshToken);
                 return dispatch('ATTEMPT', response.data.accessToken);
             } catch (error) {
-                commit('SET_REFRESH_TOKEN', null);
                 commit('SET_ACCESS_TOKEN', null);
                 return;
             }
@@ -62,15 +54,13 @@ export default {
             } catch (error) {
                 commit('SET_USER', null);
                 commit('SET_ACCESS_TOKEN', null);
-                commit('SET_REFRESH_TOKEN', null);
             }
         },
-        async LOGOUT({ commit }, params) {
-            await axios.delete('logout', params);
+        async LOGOUT({ commit }) {
+            await axios.delete('logout');
             commit('SET_USER', null);
             commit('SET_USER_INFO', null);
             commit('SET_ACCESS_TOKEN', null);
-            commit('SET_REFRESH_TOKEN', null);
         },
         async REGISTRATION(_, params) {
             await axios.post('users/registration', params);
