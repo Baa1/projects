@@ -1,17 +1,41 @@
 <template>
-  <div class="Registration">
-    <vue-form-generator :schema="schema" :model="model" :options="formOptions"></vue-form-generator>
+  <div>
+    <b-form @submit.prevent="registrationClicked">
+      <b-form-group
+        id="input-group-1"
+        label="Login:"
+        label-for="loginField"
+      >
+        <b-form-input
+          id="loginField"
+          v-model="form.login"
+          type="text"
+          placeholder="Enter login"
+          required
+          class="col-xs-2 col-sm-2 col-md-2"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-2" label="Password:" label-for="passwordField">
+        <b-form-input
+          id="passwordField"
+          v-model="form.password"
+          type="password"
+          placeholder="Enter password"
+          required
+          class="col-xs-2 col-sm-2 col-md-2"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-button type="submit" variant="primary">Register</b-button>
+    </b-form>
   </div>
 </template>
 
 <script>
-import VueFormGenerator from 'vue-form-generator'
 import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'Registration',
-    components: {
-        "vue-form-generator": VueFormGenerator.component
-    },
     computed: {
         ...mapGetters([
             'ROLES',
@@ -19,78 +43,15 @@ export default {
     },
     data () {
         return {
-        model: {
-            login: '',
-            password: '',
-            email: '',
-            name: '',
-            surname: '',
-            patronymic: '',
-            roleId: 0,
-            birthday: ''
-        },
-        schema: {
-            fields: [
-                {
-                    type: 'input',
-                    inputType: 'text',
-                    label: 'Логин',
-                    model: 'login',
-                    featured: true,
-                    required: true
-                },
-                {
-                    type: 'input',
-                    inputType: 'password',
-                    label: 'Пароль',
-                    model: 'password',
-                    featured: true,
-                    required: true
-                },
-                {
-                    type: 'input',
-                    inputType: 'text',
-                    label: 'Фамилия',
-                    model: 'surname',
-                    featured: true,
-                    required: true
-                },
-                {
-                    type: 'input',
-                    inputType: 'text',
-                    label: 'Имя',
-                    model: 'name',
-                    featured: true,
-                    required: true
-                },
-                {
-                    type: 'input',
-                    inputType: 'text',
-                    label: 'Отчество',
-                    model: 'patronymic',
-                    featured: true,
-                    required: true
-                },
-                {
-                    type: 'select',
-                    label: 'Роль',
-                    model: 'roleId',
-                    values: this.ROLES(),
-                    featured: true,
-                    required: true
-                },
-                {
-                    type: 'submit',
-                    buttonText: 'Зарегистрировать',
-                    onSubmit: this.authorizatoinClicked,
-                    validateBeforeSubmit: true
-                }
-            ]
-        },
-        formOptions: {
-                validateAfterLoad: true,
-                validateAfterChanged: true,
-                validateAsync: true
+            form: {
+                login: '',
+                password: '',
+                email: '',
+                name: '',
+                surname: '',
+                patronymic: '',
+                roleId: 0,
+                birthday: ''
             }
         }
     },
@@ -100,14 +61,14 @@ export default {
         ]),
         registrationClicked: async () => {
             await this.REGISTRATION({
-                login: this.model.login, 
-                password: this.model.password,
-                email: this.model.email,
-                name: this.model.name,
-                surname: this.model.surname,
-                patronymic: this.model.patronymic,
-                roleId: this.model.roleId,
-                birthday: this.model.birthday
+                login: this.form.login, 
+                password: this.form.password,
+                email: this.form.email,
+                name: this.form.name,
+                surname: this.form.surname,
+                patronymic: this.form.patronymic,
+                roleId: this.form.roleId,
+                birthday: this.form.birthday
             });
         }
     }

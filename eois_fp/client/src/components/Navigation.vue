@@ -1,26 +1,36 @@
 <template>
     <div>
-        <b-navbar toggleable="lg" type="light" variant="info">
-            <b-navbar-nav>
-                <b-navbar-brand active :to="{ name: 'home'}">
-                    Home
-                </b-navbar-brand>
-                <template v-if="AUTHENTICATED">
+        <b-navbar toggleable="lg" type="dark" variant="primary">
+            <b-navbar-brand :to="{ name: 'home'}">
+                Home
+            </b-navbar-brand>
+            <template v-if="AUTHENTICATED">
+                <b-navbar-nav>
                     <b-navbar-brand :to="{ name: 'about'}">
                         About
                     </b-navbar-brand>
+                    <b-navbar-brand :to="{ name: 'registration'}">
+                        Registration
+                    </b-navbar-brand>
+                    <b-navbar-brand :to="{ name: 'firm'}">
+                        Firm
+                    </b-navbar-brand>
+                </b-navbar-nav>
+                <b-navbar-nav  class="ml-auto">
                     <b-nav-item>
                         <b-button size="sm" class="my-2 my-sm-0" @click.prevent="logoutClicked">
                             Log Out
                         </b-button>
                     </b-nav-item>
-                </template>
-                <template v-else>
+                </b-navbar-nav>
+            </template>
+            <template v-else>
+                <b-navbar-nav class="ml-auto">
                     <b-navbar-brand :to="{ name: 'login'}">
                         Log In
                     </b-navbar-brand>
-                </template>
-            </b-navbar-nav>    
+                </b-navbar-nav>
+            </template>
         </b-navbar>
     </div>
 </template>
