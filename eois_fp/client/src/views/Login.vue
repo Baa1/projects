@@ -1,17 +1,41 @@
 <template>
-  <div class="Login">
-    <vue-form-generator :schema="schema" :model="model" :options="formOptions"></vue-form-generator>
+  <div>
+    <b-form @submit.prevent="authorizatoinClicked">
+      <b-form-group
+        id="input-group-1"
+        label="Login:"
+        label-for="loginField"
+      >
+        <b-form-input
+          id="loginField"
+          v-model="form.login"
+          type="text"
+          placeholder="Enter login"
+          required
+          class="col-xs-2 col-sm-2 col-md-2"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-2" label="Password:" label-for="passwordField">
+        <b-form-input
+          id="passwordField"
+          v-model="form.password"
+          type="password"
+          placeholder="Enter password"
+          required
+          class="col-xs-2 col-sm-2 col-md-2"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-button type="submit" variant="primary">Log in</b-button>
+    </b-form>
   </div>
 </template>
 
 <script>
-import VueFormGenerator from 'vue-form-generator'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Login',
-  components: {
-      "vue-form-generator": VueFormGenerator.component
-  },
   computed: {
       ...mapGetters([
           'AUTHENTICATED',
@@ -19,42 +43,9 @@ export default {
   },
   data() {
     return {
-      model: {
+      form: {
         login: '',
         password: ''
-      },
-      schema: {
-        fields: [
-          {
-            type: 'input',
-            inputType: 'text',
-            label: 'Логин',
-            model: 'login',
-            placeholder: 'login',
-            featured: true,
-            required: true
-          },
-          {
-            type: 'input',
-            inputType: 'password',
-            label: 'Пароль',
-            model: 'password',
-            placeholder: 'password',
-            featured: true,
-            required: true
-          },
-          {
-            type: 'submit',
-            buttonText: 'Войти',
-            onSubmit: this.authorizatoinClicked,
-            validateBeforeSubmit: true
-          }
-        ]
-      },
-      formOptions: {
-        validateAfterLoad: true,
-        validateAfterChanged: true,
-        validateAsync: true
       }
     }
   },
@@ -63,7 +54,7 @@ export default {
         'LOGIN'
     ]),
     async authorizatoinClicked() {
-      await this.LOGIN(this.model);
+      await this.LOGIN(this.form);
       if (this.AUTHENTICATED) this.$router.replace({
         name: 'about'
       });
@@ -72,6 +63,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

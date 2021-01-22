@@ -1,6 +1,8 @@
 <template>
   <div class="Home">
-      <h1>Главная страница</h1>
+      <header class="toolbar toolbar-header">
+          <h1 class="title">Home Page</h1>
+      </header>
   </div>
 </template>
 
