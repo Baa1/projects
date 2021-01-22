@@ -82,7 +82,10 @@ export default {
             } catch (error) {
                 commit('SET_USER_INFO', null);
             }
-            
         },
+        async REFRESH({ commit }) {
+            let response = await axios.post('refresh', { token: this.state.user.refreshToken });
+            commit('SET_ACCESS_TOKEN', response.accessToken);
+        }
     }
 }

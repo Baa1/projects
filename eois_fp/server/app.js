@@ -4,7 +4,6 @@ const path = require('path');
 const logger = require('morgan');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const settings = require('./settings');
 const postgres = require('./db/postgres');
 const utils = require('./utils');
 
@@ -43,7 +42,7 @@ app.post('/login', async (req, res) => {
             }
             const accessToken = generateAccessToken(payload);
             const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET);
-            await postgres.none('INSERT INTO tokens (token_value) VALUES ($1)', refreshToken);
+            await postgres.none('INSERT INTO refresh_tokens (token) VALUES ($1)', refreshToken);
             return res.json({
                 accessToken: accessToken,
                 refreshToken: refreshToken
@@ -57,14 +56,14 @@ app.post('/login', async (req, res) => {
 });
 
 app.delete('/logout', (req, res) => {
-    postgres.none('DELETE FROM tokens WHERE token_value = $1', req.body.token);
+    //postgres.none('DELETE FROM tokens WHERE token_value = $1', req.body.token);
     res.sendStatus(204);
 });
 
 app.post('/refresh', async (req, res) => {
     const refreshToken = req.body.token;
     if (refreshToken == null) return res.sendStatus(401);
-    let refreshTokens = await postgres.any('SELECT * FROM tokens WHERE token_value = $1', refreshToken);
+    let refreshTokens = await postgres.any('SELECT * FROM refresh_tokens WHERE token = $1', refreshToken);
     if (refreshTokens == null || refreshTokens.length == 0) return res.sendStatus(403);
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.sendStatus(403);
@@ -74,7 +73,7 @@ app.post('/refresh', async (req, res) => {
 });
 
 function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
 }
 
 //auth middlware

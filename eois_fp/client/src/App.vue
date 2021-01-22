@@ -16,6 +16,8 @@ export default {
 
 <style>
 	#app {
-		background-color: yellow;
+		margin: 0;
+		padding: 0;
+		background-color: dimgray;
 	}
 </style>
