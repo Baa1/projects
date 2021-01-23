@@ -1,6 +1,14 @@
 <template>
-  <div>
-    
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+      </div>
+      <div class="col-sm">
+        <LoginForm/>
+      </div>
+      <div class="col-sm">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -8,12 +16,11 @@
 import LoginForm from '../forms/LoginForm'
 export default {
   name: 'Login',
-  componsnts: {
+  components: {
     LoginForm
   }
 }
 </script>
 
-<style scoped>
-
+<style>
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-list-group>
-            <b-list-group-item v-for="firm in FIRMS" :key="firm.id">{{firm.name}}</b-list-group-item>
+            <b-list-group-item v-for="firm in FIRMS" :key="firm.id">{{firm.name}}: {{firm.tagline}}</b-list-group-item>
         </b-list-group>
     </div>
 </template>

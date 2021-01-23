@@ -1,20 +1,20 @@
 <template>
   <div class="About">
-      <h4>Общая информация</h4>
+      <h4>Common info</h4>
       <div>
-          <h5>Фамилия</h5>
+          <h5>Surname</h5>
           <p>{{userInfo.surname}}</p>
       </div>
       <div>
-          <h5>Имя</h5>
+          <h5>Name</h5>
           <p>{{userInfo.name}}</p>
       </div>
       <div>
-          <h5>Отчество</h5>
+          <h5>Patromymic</h5>
           <p>{{userInfo.patronymic}}</p>
       </div>
       <div>
-          <h5>Дата рождения</h5>
+          <h5>Birthday</h5>
           <p>{{userInfo.birthday}}</p>
       </div>
   </div>

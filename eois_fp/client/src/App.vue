@@ -18,6 +18,5 @@ export default {
 	#app {
 		margin: 0;
 		padding: 0;
-		background-color: dimgray;
 	}
 </style>

@@ -1,29 +1,23 @@
 <template>
   <div>
     <b-form @submit.prevent="authorizatoinClicked">
-      <b-form-group
-        id="input-group-1"
-        label="Login:"
-        label-for="loginField"
-      >
+      <b-form-group label="Login:" label-for="loginField">
         <b-form-input
           id="loginField"
           v-model="form.login"
           type="text"
           placeholder="Enter login"
           required
-          class="col-xs-2 col-sm-2 col-md-2"
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Password:" label-for="passwordField">
+      <b-form-group label="Password:" label-for="passwordField">
         <b-form-input
           id="passwordField"
           v-model="form.password"
           type="password"
           placeholder="Enter password"
           required
-          class="col-xs-2 col-sm-2 col-md-2"
         ></b-form-input>
       </b-form-group>
 

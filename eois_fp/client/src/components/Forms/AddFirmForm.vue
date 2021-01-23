@@ -11,7 +11,6 @@
           type="text"
           placeholder="Enter name"
           required
-          class="col-xs-2 col-sm-2 col-md-2"
         ></b-form-input>
       </b-form-group>
 
@@ -25,7 +24,6 @@
           type="text"
           placeholder="Enter tagline"
           required
-          class="col-xs-2 col-sm-2 col-md-2"
         ></b-form-input>
       </b-form-group>
 
@@ -52,6 +50,8 @@ export default {
          ]),
         async addFirm() {
             await this.ADD_FIRM(this.form);
+            this.form.name = '';
+            this.form.tagline = '';
         }
     }
 }
