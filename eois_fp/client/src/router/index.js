@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../views/Home.vue'
-import About from '../views/About.vue'
-import Firm from '../views/Firm.vue'
-import Login from '../views/Login.vue'
-import Registration from '../views/Registration.vue'
+import Home from '../views/Home'
+import About from '../views/About'
+import Firm from '../views/Firm'
+import Login from '../views/Login'
+import Registration from '../views/Registration'
 import store from '@/store'
 
 Vue.use(Router);

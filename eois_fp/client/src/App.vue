@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Navigaton from '../src/components/Navigation.vue'
+import Navigaton from '../src/components/Navs/Navigation'
 export default {
 	components: {
 		Navigaton

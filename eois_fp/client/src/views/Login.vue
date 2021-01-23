@@ -1,64 +1,15 @@
 <template>
   <div>
-    <b-form @submit.prevent="authorizatoinClicked">
-      <b-form-group
-        id="input-group-1"
-        label="Login:"
-        label-for="loginField"
-      >
-        <b-form-input
-          id="loginField"
-          v-model="form.login"
-          type="text"
-          placeholder="Enter login"
-          required
-          class="col-xs-2 col-sm-2 col-md-2"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-2" label="Password:" label-for="passwordField">
-        <b-form-input
-          id="passwordField"
-          v-model="form.password"
-          type="password"
-          placeholder="Enter password"
-          required
-          class="col-xs-2 col-sm-2 col-md-2"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Log in</b-button>
-    </b-form>
+    
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import LoginForm from '../components/Forms/LoginForm.vue'
 export default {
   name: 'Login',
-  computed: {
-      ...mapGetters([
-          'AUTHENTICATED',
-      ])
-  },
-  data() {
-    return {
-      form: {
-        login: '',
-        password: ''
-      }
-    }
-  },
-  methods: {
-    ...mapActions([
-        'LOGIN'
-    ]),
-    async authorizatoinClicked() {
-      await this.LOGIN(this.form);
-      if (this.AUTHENTICATED) this.$router.replace({
-        name: 'about'
-      });
-    }
+  componsnts: {
+    LoginForm
   }
 }
 </script>
