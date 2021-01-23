@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../views/Home'
-import About from '../views/About'
-import Firm from '../views/Firm'
-import Login from '../views/Login'
-import Registration from '../views/Registration'
 import store from '@/store'
+//views
+import Home from '../components/views/Home'
+import About from '../components/views/About'
+import Firm from '../components/views/Firm'
+import Login from '../components/views/Login'
+import Registration from '../components/views/Registration'
+//forms
+import AddFirmForm from '../components/forms/AddFirmForm'
+//lists
+import FirmsList from '../components/lists/FirmsList'
 
 Vue.use(Router);
 
@@ -33,6 +38,10 @@ let router = new Router({
             name: 'firm', 
             path: '/firm', 
             component: Firm,
+            children: [
+                { path: 'add', component: AddFirmForm },
+                { path: 'all', component: FirmsList }
+            ],
             beforeEnter: (to, from, next) => {
                 if (!store.getters['AUTHENTICATED']) {
                     return next({

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import RegistrationForm from '../components/Forms/RegistrationForm'
+import RegistrationForm from '../forms/RegistrationForm'
 export default {
     name: 'Registration',
     components: {

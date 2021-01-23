@@ -9,8 +9,8 @@ export default {
         }
     },
     mutations: {
-        SET_FIRMS: (state, roles) => {
-            state.roles = roles;
+        SET_FIRMS: (state, firms) => {
+            state.firms = firms;
         }
     },
     actions: {

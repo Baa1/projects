@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Navigaton from '../src/components/Navs/Navigation'
+import Navigaton from '../src/components/navs/Navigation'
 export default {
 	components: {
 		Navigaton
