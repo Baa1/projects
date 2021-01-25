@@ -15,6 +15,9 @@
                     <b-navbar-brand :to="{ name: 'firm'}">
                         Firm
                     </b-navbar-brand>
+                     <b-navbar-brand :to="{ name: 'casting'}">
+                        Casting
+                    </b-navbar-brand>
                 </b-navbar-nav>
                 <b-navbar-nav  class="ml-auto">
                     <b-nav-item>

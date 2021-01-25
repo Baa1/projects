@@ -68,7 +68,7 @@ app.post('/refresh', async (req, res) => {
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.sendStatus(403);
         const accessToken = generateAccessToken({ login: user.login });
-        return res.json({ accessToken: accessToken });
+        return res.send({ accessToken: accessToken });
     });
 });
 

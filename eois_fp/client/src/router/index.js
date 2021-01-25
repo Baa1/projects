@@ -7,6 +7,7 @@ import About from '../components/views/About'
 import Firm from '../components/views/Firm'
 import Login from '../components/views/Login'
 import Registration from '../components/views/Registration'
+import Casting from '../components/views/Casting'
 //forms
 import AddFirmForm from '../components/forms/AddFirmForm'
 //lists
@@ -60,6 +61,19 @@ let router = new Router({
             name: 'registration', 
             path: '/registration', 
             component: Registration,
+            beforeEnter: (to, from, next) => {
+                if (!store.getters['AUTHENTICATED']) {
+                    return next({
+                        name: 'login'
+                    });
+                }
+                next();
+            }
+        },
+        { 
+            name: 'casting', 
+            path: '/casting', 
+            component: Casting,
             beforeEnter: (to, from, next) => {
                 if (!store.getters['AUTHENTICATED']) {
                     return next({

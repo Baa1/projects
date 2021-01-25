@@ -19,29 +19,35 @@ router.post('/registration', (req, res) => {
         req.body.roleId
     ];
     let sqlQuery = 'INSERT INTO users (login, password, salt, email, name, surname, patronymic, birthday, role_id)' 
-        + ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id';
-    postgres.one(sqlQuery, params)
+        + ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)';
+    postgres.none(sqlQuery, params)
         .then(data => {
             console.log(data);
-            return res.status(200).send({message: 'User created.'});
+            return res.sendStatus(200);
         })
         .catch(error => {
             console.log(error);
-            return res.status(500).send({message: 'Unable create user.'});
+            return res.sendStatus(500);
         })
 });
 
 router.get('/:id', async (req, res) => {
-    if (req.user) {
+    if (req.user && req.user.id > 0) {
         if (req.params.id > 0) {
-            let userSqlQuery = 'SELECT name, surname, patronymic, birthday FROM users WHERE id = $1';
-            let data = await postgres.one(userSqlQuery, req.params.id);
+            let sqlQuery = 'SELECT name, surname, patronymic, birthday FROM users WHERE id = $1';
+            let data = await postgres.one(sqlQuery, req.params.id);
             data.birthday = utils.getFormattedDate(new Date(data.birthday));
-            return res.status(200).send(data);
+            return res.send(data);
         } else {
-            return res.status(404).send({message: 'User not found'});
+            return res.sendStatus(401);
         }
     }
+});
+
+router.get('/participants', async (req, res) => {
+    let sqlQuery = 'SELECT id, name, surname FROM users LEFT JOIN roles ON roles.id = users.role_id WHERE roles.name = "Куратор"';
+    let data = await postgres.any(sqlQuery);
+    return res.send(data);
 });
 
 module.exports = router;
