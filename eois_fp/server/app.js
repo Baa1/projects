@@ -9,7 +9,7 @@ const utils = require('./utils');
 
 const usersRouter = require('./routes/users');
 const firmsRouter = require('./routes/firms');
-const seasonsRouter = require('./routes/seasons');
+const sessionsRouter = require('./routes/session');
 const rolesRouter = require('./routes/roles');
 const positionsRouter = require('./routes/positions');
 
@@ -98,7 +98,7 @@ app.get('/attempt', (req, res) => {
 
 app.use('/users', usersRouter);
 app.use('/firms', firmsRouter);
-app.use('/seasons', seasonsRouter);
+app.use('/sessions', sessionsRouter);
 app.use('/roles', rolesRouter);
 app.use('/positions', positionsRouter);
 

@@ -1,9 +1,10 @@
 <template>
-  <div class="container">
+  <div class="container view">
     <div class="row">
       <div class="col-sm">
       </div>
       <div class="col-sm">
+        <h3>Добро пожаловать в ЭОИС ФП</h3>
         <LoginForm/>
       </div>
       <div class="col-sm">
@@ -23,4 +24,7 @@ export default {
 </script>
 
 <style>
+.view {
+  margin-top: 50px;
+}
 </style>

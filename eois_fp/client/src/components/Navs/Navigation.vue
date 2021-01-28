@@ -1,10 +1,7 @@
 <template>
-    <div>
+    <div v-if="AUTHENTICATED">
         <b-navbar toggleable="lg" type="dark" variant="primary">
-            <b-navbar-brand :to="{ name: 'home'}">
-                Home
-            </b-navbar-brand>
-            <template v-if="AUTHENTICATED">
+            <template>
                 <b-navbar-nav>
                     <b-navbar-brand :to="{ name: 'about'}">
                         About
@@ -25,13 +22,6 @@
                             Log Out
                         </b-button>
                     </b-nav-item>
-                </b-navbar-nav>
-            </template>
-            <template v-else>
-                <b-navbar-nav class="ml-auto">
-                    <b-navbar-brand :to="{ name: 'login'}">
-                        Log In
-                    </b-navbar-brand>
                 </b-navbar-nav>
             </template>
         </b-navbar>
@@ -55,7 +45,7 @@ export default {
         logoutClicked() {
             this.LOGOUT().then(() => {
                 this.$router.replace({
-                    name: 'home'
+                    name: 'login'
                 });
             });
         }

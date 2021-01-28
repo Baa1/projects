@@ -1,5 +1,5 @@
 <template>
-    <b-card>
+    <b-card no-body>
         <b-card-header>
             <b-nav pills fill>
                 <b-nav-item to="/firm/add" exact exact-active-class="active">Add Firm</b-nav-item>

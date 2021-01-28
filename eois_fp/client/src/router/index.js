@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
 //views
-import Home from '../components/views/Home'
 import About from '../components/views/About'
 import Firm from '../components/views/Firm'
 import Login from '../components/views/Login'
@@ -17,11 +16,6 @@ Vue.use(Router);
 
 let router = new Router({
     routes: [
-        { 
-            name: 'home', 
-            path: '/', 
-            component: Home 
-        },
         { 
             name: 'about', 
             path: '/about', 
@@ -54,7 +48,7 @@ let router = new Router({
         },
         { 
             name: 'login', 
-            path: '/login', 
+            path: '/', 
             component: Login 
         },
         { 
