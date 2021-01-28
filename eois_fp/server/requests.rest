@@ -29,6 +29,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibG9naW4iO
 
 ###
 
-GET http://localhost:8081/users/participants
+GET http://localhost:8081/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibG9naW4iOiJwb3RvbG92c2theWFfZXZhIiwicm9sZSI6ItCj0YfQsNGB0YLQvdC40LoiLCJpYXQiOjE2MTE1NTU2MjN9.5Rw5v2k2_KhD75cFZCDrR4D3R4ioXHcHNYHJybYGNxI
+
+###
+
+GET http://localhost:8081/users/curators
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibG9naW4iOiJwb3RvbG92c2theWFfZXZhIiwicm9sZSI6ItCj0YfQsNGB0YLQvdC40LoiLCJpYXQiOjE2MTE1NTU2MjN9.5Rw5v2k2_KhD75cFZCDrR4D3R4ioXHcHNYHJybYGNxI

@@ -95,7 +95,7 @@ export default {
             commit('SET_ACCESS_TOKEN', response.accessToken);
         },
         async GET_USERS({ commit }) {
-            let response = await axios.get('users/participants');
+            let response = await axios.get('users');
             commit('SET_USERS', response.data);
         }
     }

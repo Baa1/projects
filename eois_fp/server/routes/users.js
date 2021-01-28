@@ -4,31 +4,35 @@ const postgres = require('../db/postgres');
 const utils = require('../utils');
 
 router.post('/registration', (req, res) => {
-    let encryptObject = utils.encrypt(req.body.password);
-    let password = encryptObject.encryptedData;
-    let salt = encryptObject.iv;
-    let params = [
-        req.body.login,
-        password,
-        salt,
-        req.body.email,
-        req.body.name,
-        req.body.surname,
-        req.body.patronymic,
-        req.body.birthday,
-        req.body.roleId
-    ];
-    let sqlQuery = 'INSERT INTO users (login, password, salt, email, name, surname, patronymic, birthday, role_id)' 
-        + ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)';
-    postgres.none(sqlQuery, params)
-        .then(data => {
-            console.log(data);
-            return res.sendStatus(200);
-        })
-        .catch(error => {
-            console.log(error);
-            return res.sendStatus(500);
-        })
+    if (req.user && req.user.id > 0) {
+        let encryptObject = utils.encrypt(req.body.password);
+        let password = encryptObject.encryptedData;
+        let salt = encryptObject.iv;
+        let params = [
+            req.body.login,
+            password,
+            salt,
+            req.body.email,
+            req.body.name,
+            req.body.surname,
+            req.body.patronymic,
+            req.body.birthday,
+            req.body.roleId
+        ];
+        let sqlQuery = 'INSERT INTO users (login, password, salt, email, name, surname, patronymic, birthday, role_id)' 
+            + ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)';
+        postgres.none(sqlQuery, params)
+            .then(data => {
+                console.log(data);
+                return res.sendStatus(200);
+            })
+            .catch(error => {
+                console.log(error);
+                return res.sendStatus(500);
+            })
+    } else {
+        return res.sendStatus(401);
+    }
 });
 
 router.get('/:id', async (req, res) => {
@@ -44,10 +48,20 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.get('/participants', async (req, res) => {
-    let sqlQuery = 'SELECT id, name, surname FROM users LEFT JOIN roles ON roles.id = users.role_id WHERE roles.name = "Куратор"';
-    let data = await postgres.any(sqlQuery);
-    return res.send(data);
+router.get('/', (req, res) => {
+    if (req.user && req.user.id > 0) {
+        let sqlQuery = `SELECT users.id as user_id, users.name as username, surname FROM users LEFT JOIN roles ON roles.id = users.role_id WHERE roles.name = 'Участник'`;
+        postgres.any(sqlQuery)
+            .then(data => {
+                return res.send(data);
+            })
+            .catch(error => {
+                console.log(error);
+                return res.sendStatus(500);
+            });
+    } else {
+        return res.sendStatus(401);
+    }
 });
 
 module.exports = router;
