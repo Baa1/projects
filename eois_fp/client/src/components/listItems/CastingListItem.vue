@@ -1,6 +1,6 @@
 <template>
-    <b-list-group-item @click="userClicked">
-        Имя: {{user.username}} {{user.surname}} Фирма: undefined Должность: undefined
+    <b-list-group-item @click="patricipantClicked">
+        Имя: {{patricipant.username}} {{patricipant.surname}} Фирма: undefined Должность: undefined
     </b-list-group-item>
 </template>
 
@@ -8,16 +8,16 @@
 export default {
     name: 'CastingList',
     props: [
-        'user'
+        'patricipant'
     ],
     data: () => {
         return {
-            user: this.user
+            patricipant: this.patricipant
         }
     },
     methods: {
-        userClicked() {
-            alert(this.user.user_id);
+        patricipantClicked() {
+            alert(this.patricipant.user_id);
         }
     }
 }

@@ -5,7 +5,7 @@ export default {
         refreshToken: null,
         user: null,
         userInfo: null,
-        users: []
+        participants: []
     },
     getters: {
         ACCESS_TOKEN(state) {
@@ -17,8 +17,8 @@ export default {
         USER(state) {
             return state.user;
         },
-        USERS(state) {
-            return state.users;
+        PARTICIPANTS(state) {
+            return state.participants;
         },
         USER_INFO(state) {
             return state.userInfo;
@@ -37,8 +37,8 @@ export default {
         SET_USER: (state, user) => {
             state.user = user;
         },
-        SET_USERS: (state, users) => {
-            state.users = users;
+        SET_PARTICIPANTS: (state, participants) => {
+            state.participants = participants;
         },
         SET_USER_INFO: (state, userInfo) => {
             state.userInfo = userInfo;
@@ -94,9 +94,9 @@ export default {
             let response = await axios.post('refresh', { token: this.state.user.refreshToken });
             commit('SET_ACCESS_TOKEN', response.accessToken);
         },
-        async GET_USERS({ commit }) {
+        async GET_PARTICIPANTS({ commit }) {
             let response = await axios.get('users');
-            commit('SET_USERS', response.data);
+            commit('SET_PARTICIPANTS', response.data);
         }
     }
 }

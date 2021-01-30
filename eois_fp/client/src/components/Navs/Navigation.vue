@@ -15,10 +15,8 @@
                      <b-navbar-brand :to="{ name: 'casting'}">
                         Casting
                     </b-navbar-brand>
-                </b-navbar-nav>
-                <b-navbar-nav  class="ml-auto">
                     <b-nav-item>
-                        <b-button size="sm" class="my-2 my-sm-0" @click.prevent="logoutClicked">
+                        <b-button size="sm" @click.prevent="logoutClicked">
                             Log Out
                         </b-button>
                     </b-nav-item>

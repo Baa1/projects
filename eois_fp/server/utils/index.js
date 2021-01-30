@@ -33,8 +33,14 @@ function getFormattedDate(date) {
     return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
 }
 
+function getCurrentDate() {
+    let date = new Date(Date.now());
+    return date.toLocaleString().split(' ')[0];
+}
+
 module.exports = {
     encrypt,
     decrypt,
-    getFormattedDate
+    getFormattedDate,
+    getCurrentDate
 }

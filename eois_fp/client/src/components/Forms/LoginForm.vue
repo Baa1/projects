@@ -45,13 +45,17 @@ export default {
   },
   methods: {
     ...mapActions([
-        'LOGIN'
+        'LOGIN',
+        'GET_SESSION'
     ]),
     async authorizatoinClicked() {
       await this.LOGIN(this.form);
-      if (this.AUTHENTICATED) this.$router.replace({
-        name: 'about'
-      });
+      if (this.AUTHENTICATED) {
+        this.$router.replace({
+          name: 'about'
+        });
+        await this.GET_SESSION();
+      }
     }
   }
 }

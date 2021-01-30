@@ -4,6 +4,7 @@ import user from './modules/user'
 import file from './modules/file'
 import role from './modules/role'
 import firm from './modules/firm'
+import session from './modules/session'
 
 Vue.use(Vuex);
 
@@ -12,7 +13,8 @@ let store = new Vuex.Store({
         user,
         file,
         role,
-        firm
+        firm,
+        session
     }
 });
 

@@ -1,7 +1,8 @@
 <template>
     <div>
         <b-list-group>
-            <CastingListItem @click="userClicked" v-for="user in USERS" :key="user.id" :user="user">
+            {{PARTICIPANTS}}
+            <CastingListItem v-for="patricipant in PARTICIPANTS" :key="patricipant.user_id" :patricipant="patricipant">
             </CastingListItem>
         </b-list-group>
     </div>
@@ -17,19 +18,16 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'USERS'
+            'PARTICIPANTS'
         ])
     },
     methods: {
         ...mapActions([
-            'GET_USERS'
-        ]),
-        userClicked(event) {
-            alert(event.target.value);
-        }
+            'GET_PARTICIPANTS'
+        ])
     },
     mounted() {
-        this.GET_USERS();
+        this.GET_PARTICIPANTS();
     }
 }
 </script>
