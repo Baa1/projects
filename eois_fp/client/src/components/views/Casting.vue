@@ -1,14 +1,14 @@
 <template>
     <div>
-        <CastingList/>
+        <CastingTable/>
     </div>
 </template>
 <script>
-import CastingList from '../lists/CastingList'
+import CastingTable from '../tables/CastingTable'
 export default {
     name: 'Casting',
     components: {
-        CastingList
+        CastingTable
     }
 }
 </script>
