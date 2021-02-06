@@ -12,8 +12,11 @@
                     <b-navbar-brand :to="{ name: 'firm'}">
                         Firm
                     </b-navbar-brand>
-                     <b-navbar-brand :to="{ name: 'casting'}">
+                    <b-navbar-brand :to="{ name: 'casting'}">
                         Casting
+                    </b-navbar-brand>
+                    <b-navbar-brand :to="{ name: 'schedule'}">
+                        Schedule
                     </b-navbar-brand>
                     <b-nav-item>
                         <b-button size="sm" @click.prevent="logoutClicked">

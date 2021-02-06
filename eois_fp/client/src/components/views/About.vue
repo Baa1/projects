@@ -1,23 +1,23 @@
 <template>
-  <div class="About">
-      <h4>Common info</h4>
-      <div>
-          <h5>Surname</h5>
-          <p>{{userInfo.surname}}</p>
-      </div>
-      <div>
-          <h5>Name</h5>
-          <p>{{userInfo.name}}</p>
-      </div>
-      <div>
-          <h5>Patromymic</h5>
-          <p>{{userInfo.patronymic}}</p>
-      </div>
-      <div>
-          <h5>Birthday</h5>
-          <p>{{userInfo.birthday}}</p>
-      </div>
-  </div>
+    <div class="About">
+        <h4>Common info</h4>
+        <div>
+            <h5>Surname</h5>
+            <p>{{userInfo.surname}}</p>
+        </div>
+        <div>
+            <h5>Name</h5>
+            <p>{{userInfo.name}}</p>
+        </div>
+        <div>
+            <h5>Patromymic</h5>
+            <p>{{userInfo.patronymic}}</p>
+        </div>
+        <div>
+            <h5>Birthday</h5>
+            <p>{{userInfo.birthday}}</p>
+        </div>
+    </div>
 </template>
 
 <script>

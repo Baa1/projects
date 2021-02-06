@@ -7,6 +7,7 @@ import Firm from '../components/views/Firm'
 import Login from '../components/views/Login'
 import Registration from '../components/views/Registration'
 import Casting from '../components/views/Casting'
+import Schedule from '../components/views/Schedule'
 //forms
 import AddFirmForm from '../components/forms/AddFirmForm'
 //lists
@@ -72,6 +73,19 @@ let router = new Router({
                 if (!store.getters['AUTHENTICATED']) {
                     return next({
                         name: 'login'
+                    });
+                }
+                next();
+            }
+        },
+        { 
+            name: 'schedule', 
+            path: '/schedule', 
+            component: Schedule,
+            beforeEnter: (to, from, next) => {
+                if (!store.getters['AUTHENTICATED']) {
+                    return next({
+                        name: 'schedule'
                     });
                 }
                 next();
