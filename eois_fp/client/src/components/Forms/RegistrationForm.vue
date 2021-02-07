@@ -143,11 +143,6 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'RegistrationForm',
-    computed: {
-        ...mapGetters([
-            'ROLES',
-        ])
-    },
     data () {
         return {
             form: {
@@ -161,6 +156,11 @@ export default {
                 birthday: ''
             }
         }
+    },
+    computed: {
+        ...mapGetters([
+            'ROLES',
+        ])
     },
     methods: {
         ...mapActions([

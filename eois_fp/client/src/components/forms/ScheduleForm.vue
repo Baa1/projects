@@ -12,6 +12,7 @@
                 locale="ru"
                 id="date"
                 size="sm"
+                v-model="form.date"
             ></b-form-datepicker>
         </b-form-group>
         <b-form-group
@@ -25,6 +26,7 @@
                 locale="ru"
                 id="time_start"
                 size="sm"
+                v-model="form.time_start"
             ></b-form-timepicker>
         </b-form-group>
         <b-form-group
@@ -38,32 +40,21 @@
                 locale="ru"
                 id="time_end"
                 size="sm"
+                v-model="form.time_end"
             ></b-form-timepicker>
         </b-form-group>
         <b-form-group
-            label="Event name"
+            label="Event"
             label-size="sm"
             label-cols="2"
-            label-for="event_name"
+            label-for="event"
             content-cols-sm="4"
         >
             <b-form-input 
                 locale="ru"
-                id="event_name"
+                id="event"
                 size="sm"
-            ></b-form-input>
-        </b-form-group>
-        <b-form-group
-            label="Event name"
-            label-size="sm"
-            label-cols="2"
-            label-for="event_name"
-            content-cols-sm="4"
-        >
-            <b-form-input 
-                locale="ru"
-                id="event_name"
-                size="sm"
+                v-model="form.event"
             ></b-form-input>
         </b-form-group>
         <b-form-group
@@ -77,6 +68,7 @@
                 locale="ru"
                 id="is_common"
                 size="sm"
+                v-model="form.is_common"
             ></b-form-checkbox>
         </b-form-group>
         <b-form-group
@@ -90,6 +82,9 @@
                 locale="ru"
                 id="position"
                 size="sm"
+                value-field="id"
+                text-field="name"
+                :options="POSITIONS"
             ></b-form-select>
         </b-form-group>
         <b-button variant="primary">Save</b-button>
@@ -98,21 +93,29 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'ScheduleForm',
     data () {
         return {
             form: {
-                login: '',
-                password: '',
-                email: '',
-                name: '',
-                surname: '',
-                patronymic: '',
-                roleId: 0,
-                birthday: ''
+                date: '',
+
             }
         }
+    },
+    computed: {
+        ...mapGetters([
+            'POSITIONS',
+        ])
+    },
+    methods: {
+        ...mapActions([
+            'GET_POSITIONS'
+        ]),
+    },
+    mounted() {
+        this.GET_POSITIONS();
     }
 }
 </script>

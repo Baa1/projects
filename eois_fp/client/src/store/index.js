@@ -5,6 +5,7 @@ import file from './modules/file'
 import role from './modules/role'
 import firm from './modules/firm'
 import session from './modules/session'
+import position from './modules/position'
 
 Vue.use(Vuex);
 
@@ -14,7 +15,8 @@ let store = new Vuex.Store({
         file,
         role,
         firm,
-        session
+        session,
+        position
     }
 });
 
