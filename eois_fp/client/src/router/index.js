@@ -50,7 +50,15 @@ let router = new Router({
         { 
             name: 'login', 
             path: '/', 
-            component: Login 
+            component: Login ,
+            beforeEnter: (to, from, next) => {
+                if (store.getters['AUTHENTICATED']) {
+                    return next({
+                        name: 'about'
+                    });
+                }
+                next();
+            }
         },
         { 
             name: 'registration', 
