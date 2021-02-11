@@ -31,4 +31,15 @@ export default {
     ALERT: 'Заполните все поля',
     //SessionCard
     SESSIONS_LIST: 'Список сессий',
+    //RegistrationForm
+    EMAIL: 'E-mail',
+    NAME: 'Имя',
+    SURNAME: 'Фамилия',
+    PATRONYMIC: 'Отчество',
+    BIRTHDAY: 'Дата рождения',
+    ROLE: 'Роль',
+    EMAIL_PLACEHOLDER: 'Введите e-mail',
+    NAME_PLACEHOLDER: 'Введите имя',
+    SURNAME_PLACEHOLDER: 'Введите фамилию',
+    PATRONYMIC_PLACEHOLDER: 'Введите отчество',
 }

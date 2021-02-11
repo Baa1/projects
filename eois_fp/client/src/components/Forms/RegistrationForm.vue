@@ -5,7 +5,7 @@
             label-size="sm" 
             label-cols="1" 
             content-cols-sm="2"
-            label="Login:" 
+            :label="locale.LOGIN" 
             label-for="loginField"
         >
             <b-form-input
@@ -13,7 +13,7 @@
                 size="sm"
                 v-model="form.login"
                 type="text"
-                placeholder="Enter login"
+                :placeholder="locale.LOGIN_PLACEHOLDER"
                 required
             ></b-form-input>
         </b-form-group>
@@ -22,7 +22,7 @@
             label-size="sm" 
             label-cols="1" 
             content-cols-sm="2"
-            label="Password:" 
+            :label="locale.PASSWORD" 
             label-for="passwordField"
         >
             <b-form-input
@@ -30,7 +30,7 @@
                 size="sm"
                 v-model="form.password"
                 type="password"
-                placeholder="Enter password"
+                :placeholder="locale.PASSWORD_PLACEHOLDER"
                 required
             ></b-form-input>
         </b-form-group>
@@ -39,7 +39,7 @@
             label-size="sm" 
             label-cols="1" 
             content-cols-sm="2"
-            label="E-mail:" 
+            :label="locale.EMAIL" 
             label-for="emailField"
         >
             <b-form-input
@@ -47,7 +47,7 @@
                 size="sm"
                 v-model="form.email"
                 type="email"
-                placeholder="Enter e-mail"
+                :placeholder="locale.EMAIL_PLACEHOLDER"
             ></b-form-input>
         </b-form-group>
 
@@ -55,7 +55,7 @@
             label-size="sm" 
             label-cols="1" 
             content-cols-sm="2"
-            label="Name:" 
+            :label="locale.NAME" 
             label-for="nameField"
         >
             <b-form-input
@@ -63,7 +63,7 @@
                 size="sm"
                 v-model="form.name"
                 type="text"
-                placeholder="Enter name"
+                :placeholder="locale.NAME_PLACEHOLDER"
                 required
             ></b-form-input>
         </b-form-group>
@@ -72,7 +72,7 @@
             label-size="sm" 
             label-cols="1" 
             content-cols-sm="2"
-            label="Patronymic:" 
+            :label="locale.PATRONYMIC" 
             label-for="patronymicField"
         >
             <b-form-input
@@ -80,7 +80,7 @@
                 size="sm"
                 v-model="form.patronymic"
                 type="text"
-                placeholder="Enter patronymic"
+                :placeholder="locale.PATRONYMIC_PLACEHOLDER"
             ></b-form-input>
         </b-form-group>
 
@@ -88,7 +88,7 @@
             label-size="sm" 
             label-cols="1" 
             content-cols-sm="2"
-            label="Surname:" 
+            :label="locale.SURNAME" 
             label-for="surnameField"
         >
             <b-form-input
@@ -96,7 +96,7 @@
                 size="sm"
                 v-model="form.surname"
                 type="text"
-                placeholder="Enter surname"
+                :placeholder="locale.SURNAME_PLACEHOLDER"
                 required
             ></b-form-input>
         </b-form-group>
@@ -105,7 +105,7 @@
             label-size="sm" 
             label-cols="1" 
             content-cols-sm="2"
-            label="Birthday:" 
+            :label="locale.BIRTHDAY" 
             label-for="birthdayField"
         >
             <b-form-input
@@ -121,7 +121,7 @@
             label-size="sm" 
             label-cols="1" 
             content-cols-sm="2"
-            label="Role:" 
+            :label="locale.ROLE" 
             label-for="roleField"
         >
             <b-form-select
@@ -141,6 +141,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import locale from '../../locale'
 export default {
     name: 'RegistrationForm',
     data () {
@@ -154,7 +155,8 @@ export default {
                 patronymic: '',
                 roleId: 0,
                 birthday: ''
-            }
+            },
+            locale
         }
     },
     computed: {
