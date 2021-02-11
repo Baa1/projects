@@ -4,7 +4,7 @@ export default {
     REGISTRATION: 'Регистрация',
     FIRM: 'Фирма',
     CASTING: 'Кастинг',
-    SHEDULE: 'Расписание',
+    SCHEDULE: 'Расписание',
     ENCOURAGEMENT: 'Поощрения',
     LOGOUT: 'Выйти',
     //EncouragementNav
