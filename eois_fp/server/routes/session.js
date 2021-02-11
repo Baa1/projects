@@ -45,7 +45,7 @@ router.get('/current_session', (req, res) => {
 
 router.get('/', (req, res) => {
   if (req.user && req.user.id > 0) {
-    let sqlQuery = 'SELECT * FROM session';
+    let sqlQuery = 'SELECT * FROM session ORDER BY date_start';
     postgres.any(sqlQuery)
     .then(data => {
       if (data && data.length > 0) {
