@@ -6,8 +6,8 @@ const utils = require('../utils');
 router.post('/', (req, res) => {
   if (req.user && req.user.id > 0) {
     let params = [
-      req.date_start,
-      req.date_end
+      req.body.date_start,
+      req.body.date_end
     ];
     let sqlQuery = 'INSERT INTO session (date_start, date_end) VALUES ($1, $2)';
     postgres.any(sqlQuery, params)
@@ -41,7 +41,28 @@ router.get('/current_session', (req, res) => {
       return res.sendStatus(500);
     });
   }
-  
+});
+
+router.get('/', (req, res) => {
+  if (req.user && req.user.id > 0) {
+    let sqlQuery = 'SELECT * FROM session';
+    postgres.any(sqlQuery)
+    .then(data => {
+      if (data && data.length > 0) {
+        data.forEach(element => {
+          element.date_start = utils.getFormattedDate(element.date_start);
+          element.date_end = utils.getFormattedDate(element.date_end);
+        });
+        return res.send(data);
+      } else {
+        return res.sendStatus(404);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      return res.sendStatus(500);
+    });
+  }
 });
 
 module.exports = router;

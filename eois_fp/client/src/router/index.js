@@ -12,9 +12,10 @@ import Encouragement from '../components/views/Encouragement'
 import Admin from '../components/views/Admin'
 //forms
 import AddFirmForm from '../components/forms/AddFirmForm'
-import SessionForm from '../components/forms/SessionForm'
 //lists
 import FirmsList from '../components/lists/FirmsList'
+//cards
+import SessionCard from '../components/cards/SessionCard'
 
 Vue.use(Router);
 
@@ -75,7 +76,7 @@ let router = new Router({
             path: '/admin', 
             component: Admin,
             children: [
-                { path: 'session', component: SessionForm }
+                { path: 'session', component: SessionCard }
             ],
             beforeEnter: (to, from, next) => {
                 if (!store.getters['AUTHENTICATED']) {

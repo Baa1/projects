@@ -168,16 +168,7 @@ export default {
             'GET_ROLES'
         ]),
         async registrationClicked() {
-            await this.REGISTRATION({
-                login: this.form.login, 
-                password: this.form.password,
-                email: this.form.email,
-                name: this.form.name,
-                surname: this.form.surname,
-                patronymic: this.form.patronymic,
-                roleId: this.form.roleId,
-                birthday: this.form.birthday
-            });
+            await this.REGISTRATION(this.form);
         }
     },
     mounted() {

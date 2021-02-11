@@ -24,4 +24,11 @@ export default {
     EOIS_WELCOME: 'Добро пожаловать в ЭОИС ФП',
     //AdminNav
     SESSION: 'Сессии',
+    //SessionForm
+    DATE_START: 'Дата начала',
+    DATE_END: 'Дата окончания',
+    ADD: 'Добавить',
+    ALERT: 'Заполните все поля',
+    //SessionCard
+    SESSIONS_LIST: 'Список сессий',
 }

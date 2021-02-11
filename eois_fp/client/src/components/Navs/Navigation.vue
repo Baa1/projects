@@ -21,7 +21,7 @@
                     <b-navbar-brand :to="{ name: 'encouragement'}">
                         {{locale.ENCOURAGEMENT}}
                     </b-navbar-brand>
-                    <b-navbar-brand :to="{ name: 'admin'}">
+                    <b-navbar-brand v-if="USER.role == 'Админ'" :to="{ name: 'admin'}">
                         {{locale.ADMIN}}
                     </b-navbar-brand>
                     <b-nav-item>

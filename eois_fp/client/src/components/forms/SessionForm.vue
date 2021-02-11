@@ -1,7 +1,7 @@
 <template>
-    <b-form>
+    <b-form @submit.prevent="addClicked">
         <b-form-group
-            label="Date Start"
+            :label="locale.DATE_START"
             label-size="sm"
             label-cols="2"
             label-for="date_start"
@@ -12,11 +12,12 @@
                 id="date_start"
                 size="sm"
                 v-model="form.date_start"
+                required
             ></b-form-datepicker>
         </b-form-group>
 
         <b-form-group
-            label="Date End"
+            :label="locale.DATE_END"
             label-size="sm"
             label-cols="2"
             label-for="date_end"
@@ -27,16 +28,18 @@
                 id="date_end"
                 size="sm"
                 v-model="form.date_end"
+                required
             ></b-form-datepicker>
         </b-form-group>
 
-        <b-button type="submit" variant="primary">Add</b-button>
+        <b-button type="submit" variant="primary">{{locale.ADD}}</b-button>
 
     </b-form>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
+import locale from '../../locale'
 export default {
     name: 'ScheduleForm',
     data () {
@@ -44,21 +47,23 @@ export default {
             form: {
                 date_start: '',
                 date_end: ''
-            }
+            },
+            locale
         }
-    },
-    computed: {
-        ...mapGetters([
-            'POSITIONS',
-        ])
     },
     methods: {
         ...mapActions([
-            'ADD_SESSION'
+            'ADD_SESSION',
+            'GET_SESSIONS'
         ]),
-    },
-    mounted() {
-        this.GET_POSITIONS();
+        async addClicked() {
+            if (this.form.date_start != '' && this.form.date_end != '') {
+                await this.ADD_SESSION(this.form)
+                await this.GET_SESSIONS();
+            } else {
+                alert(this.locale.ALERT);
+            }       
+        }
     }
 }
 </script>
