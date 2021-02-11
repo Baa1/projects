@@ -1,33 +1,34 @@
 <template>
   <div>
     <b-form @submit.prevent="authorizatoinClicked">
-      <b-form-group label="Login:" label-for="loginField">
+      <b-form-group :label="locale.LOGIN" label-for="loginField">
         <b-form-input
           id="loginField"
           v-model="form.login"
           type="text"
-          placeholder="Enter login"
+          :placeholder="LOGIN_PLACEHOLDER"
           required
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group label="Password:" label-for="passwordField">
+      <b-form-group :label="locale.PASSWORD" label-for="passwordField">
         <b-form-input
           id="passwordField"
           v-model="form.password"
           type="password"
-          placeholder="Enter password"
+          :placeholder="locale.PASSWORD_PLACEHOLDER"
           required
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Log in</b-button>
+      <b-button type="submit" variant="primary">{{locale.LOG_IN}}</b-button>
     </b-form>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import locale from '../../locale'
 export default {
   name: 'LoginForm',
   computed: {
@@ -40,7 +41,8 @@ export default {
       form: {
         login: '',
         password: ''
-      }
+      },
+      locale
     }
   },
   methods: {

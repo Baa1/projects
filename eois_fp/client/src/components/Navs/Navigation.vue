@@ -4,26 +4,26 @@
             <template>
                 <b-navbar-nav>
                     <b-navbar-brand :to="{ name: 'about'}">
-                        About
+                        {{locale.ABOUT}}
                     </b-navbar-brand>
                     <b-navbar-brand :to="{ name: 'registration'}">
-                        Registration
+                        {{locale.REGISTRATION}}
                     </b-navbar-brand>
                     <b-navbar-brand :to="{ name: 'firm'}">
-                        Firm
+                        {{locale.FIRM}}
                     </b-navbar-brand>
                     <b-navbar-brand :to="{ name: 'casting'}">
-                        Casting
+                        {{locale.CASTING}}
                     </b-navbar-brand>
                     <b-navbar-brand :to="{ name: 'schedule'}">
-                        Schedule
+                        {{locale.SCHEDULE}}
                     </b-navbar-brand>
                     <b-navbar-brand :to="{ name: 'encouragement'}">
-                        Encouragement
+                        {{locale.ENCOURAGEMENT}}
                     </b-navbar-brand>
                     <b-nav-item>
                         <b-button size="sm" @click.prevent="logoutClicked">
-                            Log Out
+                            {{locale.LOGOUT}}
                         </b-button>
                     </b-nav-item>
                 </b-navbar-nav>
@@ -34,8 +34,14 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import locale from '../../locale'
 export default {
     name: 'Navigation',
+    data() {
+        return {
+            locale
+        }
+    },
     computed: {
         ...mapGetters([
             'AUTHENTICATED',
