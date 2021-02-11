@@ -9,8 +9,10 @@ import Registration from '../components/views/Registration'
 import Casting from '../components/views/Casting'
 import Schedule from '../components/views/Schedule'
 import Encouragement from '../components/views/Encouragement'
+import Admin from '../components/views/Admin'
 //forms
 import AddFirmForm from '../components/forms/AddFirmForm'
+import SessionForm from '../components/forms/SessionForm'
 //lists
 import FirmsList from '../components/lists/FirmsList'
 
@@ -58,6 +60,22 @@ let router = new Router({
                 { path: 'salary', component: FirmsList },
                 { path: 'sport', component: FirmsList },
                 { path: 'penalty', component: FirmsList }
+            ],
+            beforeEnter: (to, from, next) => {
+                if (!store.getters['AUTHENTICATED']) {
+                    return next({
+                        name: 'login'
+                    });
+                }
+                next();
+            }
+        },
+        { 
+            name: 'admin', 
+            path: '/admin', 
+            component: Admin,
+            children: [
+                { path: 'session', component: SessionForm }
             ],
             beforeEnter: (to, from, next) => {
                 if (!store.getters['AUTHENTICATED']) {

@@ -21,6 +21,9 @@
                     <b-navbar-brand :to="{ name: 'encouragement'}">
                         {{locale.ENCOURAGEMENT}}
                     </b-navbar-brand>
+                    <b-navbar-brand :to="{ name: 'admin'}">
+                        {{locale.ADMIN}}
+                    </b-navbar-brand>
                     <b-nav-item>
                         <b-button size="sm" @click.prevent="logoutClicked">
                             {{locale.LOGOUT}}

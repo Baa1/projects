@@ -6,6 +6,7 @@ export default {
     CASTING: 'Кастинг',
     SCHEDULE: 'Расписание',
     ENCOURAGEMENT: 'Поощрения',
+    ADMIN: 'Администрирование',
     LOGOUT: 'Выйти',
     //EncouragementNav
     BEST: 'Лучший сотрудник',
@@ -21,4 +22,6 @@ export default {
     LOG_IN: 'Войти',
     //Login
     EOIS_WELCOME: 'Добро пожаловать в ЭОИС ФП',
+    //AdminNav
+    SESSION: 'Сессии',
 }
