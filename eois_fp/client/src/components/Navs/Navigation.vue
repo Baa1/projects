@@ -42,7 +42,8 @@ export default {
     computed: {
         ...mapGetters([
             'AUTHENTICATED',
-            'USER'
+            'USER',
+            'CURRENT_SESSION'
         ])
     },
     methods: {

@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'FirmForm',
     data() {
@@ -44,14 +44,24 @@ export default {
             }
         }
     },
+    computed: {
+      ...mapGetters([
+        'CURRENT_SESSION'
+      ])
+    },
     methods: {
         ...mapActions([
-            'ADD_FIRM'
+            'ADD_FIRM',
+            'GET_FIRMS'
          ]),
         async addFirm() {
-            await this.ADD_FIRM(this.form);
+            await this.ADD_FIRM({
+                firm: this.form,
+                sessionId: this.CURRENT_SESSION.id
+              });
             this.form.name = '';
             this.form.tagline = '';
+            await this.GET_FIRMS();
         }
     }
 }

@@ -6,7 +6,7 @@
           id="loginField"
           v-model="form.login"
           type="text"
-          :placeholder="LOGIN_PLACEHOLDER"
+          :placeholder="locale.LOGIN_PLACEHOLDER"
           required
         ></b-form-input>
       </b-form-group>
