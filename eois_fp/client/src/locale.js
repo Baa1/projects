@@ -24,6 +24,7 @@ export default {
     EOIS_WELCOME: 'Добро пожаловать в ЭОИС ФП',
     //AdminNav
     SESSION: 'Сессии',
+    FIRMS: 'Фирмы',
     //SessionForm
     DATE_START: 'Дата начала',
     DATE_END: 'Дата окончания',
@@ -42,4 +43,7 @@ export default {
     NAME_PLACEHOLDER: 'Введите имя',
     SURNAME_PLACEHOLDER: 'Введите фамилию',
     PATRONYMIC_PLACEHOLDER: 'Введите отчество',
+    REGISTER: 'Зарегистрировать',
+    //FirmCard
+    FIRMS_LIST: 'Список фирм',
 }

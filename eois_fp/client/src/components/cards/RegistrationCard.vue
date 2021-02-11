@@ -7,7 +7,7 @@
 <script>
 import RegistrationForm from '../forms/RegistrationForm'
 export default {
-    name: 'Registration',
+    name: 'RegistrationCard',
     components: {
       RegistrationForm
     }

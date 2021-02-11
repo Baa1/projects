@@ -6,12 +6,6 @@
                     <b-navbar-brand :to="{ name: 'about'}">
                         {{locale.ABOUT}}
                     </b-navbar-brand>
-                    <b-navbar-brand :to="{ name: 'registration'}">
-                        {{locale.REGISTRATION}}
-                    </b-navbar-brand>
-                    <b-navbar-brand :to="{ name: 'firm'}">
-                        {{locale.FIRM}}
-                    </b-navbar-brand>
                     <b-navbar-brand :to="{ name: 'casting'}">
                         {{locale.CASTING}}
                     </b-navbar-brand>

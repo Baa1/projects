@@ -134,7 +134,7 @@
             ></b-form-select>
         </b-form-group>
 
-      <b-button type="submit" variant="primary">Register</b-button>
+      <b-button type="submit" variant="primary">{{locale.REGISTER}}</b-button>
     </b-form>
   </div>
 </template>
