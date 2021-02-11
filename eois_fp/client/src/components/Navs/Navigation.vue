@@ -18,6 +18,9 @@
                     <b-navbar-brand :to="{ name: 'schedule'}">
                         Schedule
                     </b-navbar-brand>
+                    <b-navbar-brand :to="{ name: 'encouragement'}">
+                        Encouragement
+                    </b-navbar-brand>
                     <b-nav-item>
                         <b-button size="sm" @click.prevent="logoutClicked">
                             Log Out
