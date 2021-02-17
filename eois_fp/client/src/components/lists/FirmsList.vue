@@ -12,7 +12,8 @@ export default {
     name: 'FirmsList',
     computed: {
         ...mapGetters([
-            'FIRMS'
+            'FIRMS',
+            'CURRENT_SESSION'
         ])
     },
     methods: {
@@ -21,7 +22,7 @@ export default {
         ])
     },
     mounted() {
-        this.GET_FIRMS();
+        this.GET_FIRMS(this.CURRENT_SESSION.id);
     }
 }
 </script>

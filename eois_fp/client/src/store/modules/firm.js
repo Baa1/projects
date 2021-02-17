@@ -14,8 +14,8 @@ export default {
         }
     },
     actions: {
-        async GET_FIRMS({ commit }) {
-            let response = await axios.get('firms');
+        async GET_FIRMS({ commit }, params) {
+            let response = await axios.get('firms?' + 'session_id=' + params);
             commit('SET_FIRMS', response.data);
         },
         async ADD_FIRM(_, params) {

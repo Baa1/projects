@@ -56,7 +56,7 @@ export default {
                 return;
             }
         },
-        async ATTEMPT({ commit }, accessToken) {
+        async ATTEMPT({ commit, dispatch }, accessToken) {
             if (accessToken) {
                 commit('SET_ACCESS_TOKEN', accessToken);
             }
@@ -66,10 +66,12 @@ export default {
             try {
                 let response = await axios.get('attempt');
                 commit('SET_USER', response.data);
+                return dispatch('GET_CURRENT_SESSION');
             } catch (error) {
                 commit('SET_USER', null);
                 commit('SET_ACCESS_TOKEN', null);
                 commit('SET_REFRESH_TOKEN', null);
+                return;
             }
         },
         async LOGOUT({ commit }, params) {

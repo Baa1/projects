@@ -47,8 +47,7 @@ export default {
   },
   methods: {
     ...mapActions([
-        'LOGIN',
-        'GET_CURRENT_SESSION'
+        'LOGIN'
     ]),
     async authorizatoinClicked() {
       await this.LOGIN(this.form);
@@ -56,7 +55,6 @@ export default {
         this.$router.replace({
           name: 'about'
         });
-        await this.GET_CURRENT_SESSION();
       }
     }
   }

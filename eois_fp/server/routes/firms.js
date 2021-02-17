@@ -1,4 +1,5 @@
 const express = require('express');
+const { query } = require('../db/postgres');
 const router = express.Router();
 const postgres = require('../db/postgres');
 
@@ -39,8 +40,8 @@ router.post('/', (req, res) => {
 
 router.get('/', async (req, res) => {
   if (req.user && req.user.id > 0) {
-    let sqlQuery = 'SELECT * FROM firms';
-    let data = await postgres.any(sqlQuery);
+    let sqlQuery = 'SELECT firms.id as id, firms.name FROM firm_session LEFT JOIN firms ON firms.id = firm_session.firm_id WHERE session_id = $1';
+    let data = await postgres.any(sqlQuery, req.query.session_id);
     return res.send(data);
   } else {
     return res.sendStatus(401);

@@ -44,3 +44,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibG9naW4iO
 GET http://localhost:8081/positions
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibG9naW4iOiJwb3RvbG92c2theWFfZXZhIiwicm9sZSI6ItCj0YfQsNGB0YLQvdC40LoiLCJpYXQiOjE2MTE1NTU2MjN9.5Rw5v2k2_KhD75cFZCDrR4D3R4ioXHcHNYHJybYGNxI
+
+###
+
+GET http://localhost:8081/firms/?session_id=1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibG9naW4iOiJwb3RvbG92c2theWFfZXZhIiwicm9sZSI6ItCj0YfQsNGB0YLQvdC40LoiLCJpYXQiOjE2MTE1NTU2MjN9.5Rw5v2k2_KhD75cFZCDrR4D3R4ioXHcHNYHJybYGNxI
