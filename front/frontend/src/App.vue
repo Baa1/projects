@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <VerificationCard/>
+    <router-link to="verification">Verification<router-link/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import VerificationCard from './components/VerificationCard.vue'
 
 export default {
   name: 'App',
-  components: {
-    VerificationCard
-  }
 }
 </script>
 
